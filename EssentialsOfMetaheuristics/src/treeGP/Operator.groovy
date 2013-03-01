@@ -1,5 +1,7 @@
 package treeGP
 
+import java.lang.Math
+
 class Operator {
     
     def arityTwo = ['+', '-', '/', '*']
@@ -23,6 +25,17 @@ class Operator {
             case '/':
                 return arg1 / arg2
             
+        }
+    }
+    
+    def evaluate(arg) {
+        switch (symbol) {
+            case 'sin':
+                return Math.sin(arg)
+            case 'cos':
+                return Math.cos(arg)
+            case 'tan':
+                return Math.tan(arg)
         }
     }
     
