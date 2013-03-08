@@ -7,7 +7,6 @@ class Node {
          
     def arityTwo = ['+', '-', '/', '*']
     def arityOne = ['sin', 'cos', 'tan']
-    def numbers = [0,1,2,3,4,5,6,7,8,9]
     def value
     def arity
     def isOperator
@@ -27,9 +26,10 @@ class Node {
     
     
     def Node(value, left = NullNode.instance(), right = NullNode.instance()) {
+        this.value = value
         arity = assignArity(value)
         isOperator = (arity != 0)
-        isVar = (!numbers.contains(value) && !isOperator)
+        isVar = (!value.getClass() == String && !isOperator)
     }
     
     def isLeaf() {
@@ -72,11 +72,11 @@ class Node {
     def evaluateArityOne(arg) {
         switch (value) {
             case 'sin':
-                return Math.sin(evaluate(arg))
+                return Math.sin(arg.evaluate())
             case 'cos':
-                return Math.cos(evaluate(arg))
+                return Math.cos(arg.evaluate())
             case 'tan':
-                return Math.tan(evaluate(arg))
+                return Math.tan(arg.evaluate())
         }
     }
     
