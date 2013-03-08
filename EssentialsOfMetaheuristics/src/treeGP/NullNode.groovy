@@ -1,6 +1,5 @@
 package treeGP
 
-//test push
 class NullNode {
     
     
