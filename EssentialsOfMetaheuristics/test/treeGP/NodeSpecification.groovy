@@ -199,8 +199,6 @@ class NodeSpecification extends Specification {
 	
 	def 'test size'() {
 		when:
-		
-		when:
 		Node head = new Node ('+')
 		Node d1l = new Node ('-')
 		Node d1r = new Node ('*')
@@ -220,5 +218,51 @@ class NodeSpecification extends Specification {
 		head.size() == 7
 		d1l.size() == 3
 		d2l1.size() == 1
+	}
+	
+	def 'test depth'() {
+		when:
+		Node head = new Node ('+')
+		Node d1l = new Node ('-')
+		Node d1r = new Node ('*')
+		Node d2l1 = new Node (5)
+		Node d2r1 = new Node (2)
+		Node d2l2 = new Node (4)
+		Node d2r2 = new Node (4)
+		head.left = d1l
+		head.right = d1r
+		d1l.left = d2l1
+		d1l.right = d2r1
+		d1r.left = d2l2
+		d1r.right = d2r2
+		
+		then:
+		print(head.depth())
+		
+	}
+	
+	def 'test random nodes'() {
+		when:
+		Node head = new Node ('+')
+		Node d1l = new Node ('-')
+		Node d1r = new Node ('*')
+		Node d2l1 = new Node (5)
+		Node d2r1 = new Node (2)
+		Node d2l2 = new Node (4)
+		Node d2r2 = new Node (4)
+		head.left = d1l
+		head.right = d1r
+		d1l.left = d2l1
+		d1l.right = d2r1
+		d1r.left = d2l2
+		d1r.right = d2r2
+		
+		def tests = 100
+		
+		
+		then:
+		tests.times {
+			println(head.getRandomNode())
+		}
 	}
 }

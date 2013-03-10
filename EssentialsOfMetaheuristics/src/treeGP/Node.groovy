@@ -27,7 +27,7 @@ class Node {
     }
     
     
-    
+    //remove nullnode entirely, it doesn't seem to work
     def Node(value, left = NullNode.instance(), right = NullNode.instance()) {
         this.value = value
         arity = assignArity(value)
@@ -91,7 +91,7 @@ class Node {
 		
 	}
 	
-	def crossover(Node a, Node b) {
+	static Node crossover(Node a, Node b) {
 		
 		Node parentOne = a.clone()
 		Node parentTwo = b.clone()
@@ -101,12 +101,22 @@ class Node {
 		
 	}
 	
-	def getRandomNode() {
+	def getRandomNode(r = rand.nextInt() % size()) {
 		boolean returnLeaf = rand.nextInt(10) == 0
+		
+		//def r = rand.nextInt() % size()
+		if (left != null && r < left.size()) {
+			return left.getRandomNode(r)
+		} else if (right != null && r > left.size()) {
+			return right.getRandomNode(r - (right.size() - 1))
+		} else {
+			return this
+		}
 		
 	}
 	
 	def size() {
+		
 		if (arity == 0) {
 			return 1
 		} else if (arity == 1) {
@@ -115,6 +125,13 @@ class Node {
 			return 1 + left.size() + right.size()
 		}
 		
+	}
+	
+	def depth() {
+		if (right.depth() > left.depth()) {
+			return right.depth() + 1
+		}
+		return left.depth() + 1
 	}
 	
 	def clone() {
