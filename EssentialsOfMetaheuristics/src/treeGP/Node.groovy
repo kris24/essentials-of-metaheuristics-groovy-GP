@@ -96,6 +96,25 @@ class Node {
 		Node parentOne = a.clone()
 		Node parentTwo = b.clone()
 		
+		Node headOne = parentOne.getRandomNode()
+		Node headTwo = parentTwo.getRandomNode()
+		
+	}
+	
+	def getRandomNode() {
+		boolean returnLeaf = rand.nextInt(10) == 0
+		
+	}
+	
+	def size() {
+		if (arity == 0) {
+			return 1
+		} else if (arity == 1) {
+			return 1 + right.size()
+		} else {
+			return 1 + left.size() + right.size()
+		}
+		
 	}
 	
 	def clone() {

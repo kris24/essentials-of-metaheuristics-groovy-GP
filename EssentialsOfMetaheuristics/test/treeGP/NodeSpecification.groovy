@@ -1,7 +1,6 @@
 package treeGP
 
 import spock.lang.Specification
-import treeGP.*
 
 class NodeSpecification extends Specification {
 	def setupSpec() {
@@ -196,5 +195,30 @@ class NodeSpecification extends Specification {
 		head != head2
 		head.toString() == head2.toString()
 		head.evaluate() == head2.evaluate()
+	}
+	
+	def 'test size'() {
+		when:
+		
+		when:
+		Node head = new Node ('+')
+		Node d1l = new Node ('-')
+		Node d1r = new Node ('*')
+		Node d2l1 = new Node (5)
+		Node d2r1 = new Node (2)
+		Node d2l2 = new Node (4)
+		Node d2r2 = new Node (4)
+		head.left = d1l
+		head.right = d1r
+		d1l.left = d2l1
+		d1l.right = d2r1
+		d1r.left = d2l2
+		d1r.right = d2r2
+		
+		then:
+		
+		head.size() == 7
+		d1l.size() == 3
+		d2l1.size() == 1
 	}
 }
