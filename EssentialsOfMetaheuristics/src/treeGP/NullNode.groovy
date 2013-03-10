@@ -12,7 +12,13 @@ class NullNode {
     static def instance() {
         return this.instance
     }
+	
+	def clone() {
+		return this.instance
+	}
     
+
+	
     def insert(key, value) {
         return new Node(data)
     }

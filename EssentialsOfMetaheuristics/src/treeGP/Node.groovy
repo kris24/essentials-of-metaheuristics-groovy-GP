@@ -1,7 +1,10 @@
 package treeGP
 
+import java.util.Random
+
 class Node {
     
+	Random rand = new Random()
     Node right
     Node left
          
@@ -47,11 +50,7 @@ class Node {
         } else if (arity == 2) {
             return evaluateArityTwo(left, right)
         }
-        
-        
-        
-        
-        
+      
     }
     
     
@@ -80,9 +79,47 @@ class Node {
         }
     }
     
+	def mutate() {
+		
+		if (arity == 2) {
+			value = arityTwo[rand.nextInt(4)]
+		} else if (arity == 1) {
+			value = arityOne[rand.nextInt(3)]
+		}
+		
+		
+		
+	}
+	
+	def crossover(Node a, Node b) {
+		
+		Node parentOne = a.clone()
+		Node parentTwo = b.clone()
+		
+	}
+	
+	def clone() {
+		Node head = new Node(value)
+		if (left != null) {
+			head.left = left.clone()
+		}
+		if (right != null) {
+			head.right = right.clone()
+		}
+		return head
+	}
+	
+	
+	
     String toString(){
-        return value.toString()
+		if (arity == 0) {
+			return value.toString()
+		} else if (arity == 1) {
+			return value.toString()+ "("+ right.toString() + ")"
+		}
+		return "(" + left.toString() + " " +  value.toString() + " " + right.toString() + ")"
     }
+	
     def isNull() {
         return false
     }
