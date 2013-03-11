@@ -299,7 +299,7 @@ class NodeSpecification extends Specification {
 
 
         
-
+		println("GetRandomNode result breakdown:")
         println("Percentage ((5 - 2) + (4 * 4)) occured: " + (timesWhole / tests)*100 + "%")
         println("Percentage (5 - 2) occured: " + (timesLeft / tests)*100 + "%")
         println("Percentage (4 * 4) occured: " + (timesRight / tests)*100 + "%")
@@ -307,5 +307,7 @@ class NodeSpecification extends Specification {
         println("Percentage 2 occured: " + (timesTwo / tests)*100 + "%")
         println("Percentage 4 occured: " + (timesFour / tests)*100 + "%")
         (timesWhole + timesLeft + timesRight + timesFive + timesTwo + timesFour)/tests == 1
+		println("  ")
     }
+	
 }

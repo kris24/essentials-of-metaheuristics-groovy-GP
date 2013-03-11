@@ -16,6 +16,7 @@ class Node {
     def isVar
 
 
+
     def assignArity = { value ->
         if (arityTwo.contains(value)) {
             arity = 2
@@ -139,10 +140,15 @@ class Node {
             }
             return right.getRandomNodeRecursive(r, iterations, firstNode)
         }
-
-
     }
-
+	//I don't know what I'm doing
+	def growTree(maxD) {
+		
+		if (depth() == maxD) {
+			return new Node (nextInt(valueLimit))
+		}
+	}
+	
     def size() {
 
         if (arity == 0) {
