@@ -259,7 +259,7 @@ class NodeSpecification extends Specification {
         d1r.left = d2l2
         d1r.right = d2r2
 
-        def tests = 100
+        def tests = 1000
         def timesWhole = 0
         def timesLeft = 0
         def timesRight = 0

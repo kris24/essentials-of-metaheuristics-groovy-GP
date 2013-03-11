@@ -112,21 +112,32 @@ class Node {
     //
     //    }
 
-    def getRandomNode(r = (rand.nextInt() % depth()), iterations = 0, Node firstNode = this) {
+    def getRandomNode() {
+		Node firstNode = this
+		def r = (rand.nextInt(depth()))
+		def iterations = 0
+		return getRandomNodeRecursive(r, iterations, firstNode)
+	}
+	
+	def getRandomNodeRecursive(r, iterations, firstNode) {
+		//println("depth " + r)
+		//println("iterations " + iterations)
 
         int direction = rand.nextInt(2)
         if (iterations == r) {
             return this.clone()
         } else if (direction == 0) {
+			iterations++
             if (left == null){
-                return firstNode.getRandomNode(r, iterations++, firstNode)
+				return firstNode.getRandomNodeRecursive(r, iterations, firstNode)
             }
-            return left.getRandomNode(r, iterations++, firstNode)
+            return left.getRandomNodeRecursive(r, iterations, firstNode)
         } else if (direction == 1) {
+			iterations++
             if (right == null){
-                return firstNode.getRandomNode(r, iterations++, firstNode)
+                return firstNode.getRandomNodeRecursive(r, iterations, firstNode)
             }
-            return right.getRandomNode(r, iterations++, firstNode)
+            return right.getRandomNodeRecursive(r, iterations, firstNode)
         }
 
 
