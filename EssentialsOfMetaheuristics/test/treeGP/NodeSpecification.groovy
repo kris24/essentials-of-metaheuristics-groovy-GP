@@ -237,7 +237,9 @@ class NodeSpecification extends Specification {
 		d1r.right = d2r2
 		
 		then:
-		print(head.depth())
+		head.depth() == 3
+		d1l.depth() == 2
+		d2l1.depth() == 1
 		
 	}
 	
@@ -258,11 +260,47 @@ class NodeSpecification extends Specification {
 		d1r.right = d2r2
 		
 		def tests = 100
-		
+		def results = new ArrayList<String>()
 		
 		then:
 		tests.times {
-			println(head.getRandomNode())
+			results.add(head.getRandomNode().toString())
+			//there are 7 possibilities, 6 unique
+			
+			//println(head.getRandomNode())
 		}
+		def timesWhole
+		def timesLeft
+		def timesRight
+		def timesFive
+		def timesTwo
+		def timesFour //twice as significant
+		
+		for(item in results) {
+			println(item)
+			switch(item) {
+				case "((5 - 2) + (4 * 4))":
+				timesWhole++
+				case "(5 - 2)":
+				timesLeft++
+				case "(4 * 4)":
+				timesRight++
+				case "5":
+				timesFive++
+				case "2":
+				timesTwo++
+				case "4":
+				timesFour++
+				default:
+				println("Something went wrong")
+			}
+		}
+		
+		println("Percentage ((5 - 2) + (4 * 4)) occured: " + (timesWhole / tests))
+		println("Percentage (5 - 2) occured: " + (timesLeft / tests))
+		println("Percentage (4 * 4) occured: " + (timesRight / tests))
+		println("Percentage 5 occured: " + (timesFive / tests))
+		println("Percentage 2 occured: " + (timesTwo / tests))
+		println("Percentage 4 occured: " + (timesFour / tests))
 	}
 }

@@ -108,9 +108,9 @@ class Node {
 		if (left != null && r < left.size()) {
 			return left.getRandomNode(r)
 		} else if (right != null && r > left.size()) {
-			return right.getRandomNode(r - (right.size() - 1))
+			return right.getRandomNode(r - (right.size() ))
 		} else {
-			return this
+			return this.clone()
 		}
 		
 	}
@@ -128,6 +128,9 @@ class Node {
 	}
 	
 	def depth() {
+		if (arity == 0) {
+			return 1
+		}
 		if (right.depth() > left.depth()) {
 			return right.depth() + 1
 		}
