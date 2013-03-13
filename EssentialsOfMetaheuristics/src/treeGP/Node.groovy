@@ -10,11 +10,12 @@ class Node {
 
     def arityTwo = ['+', '-', '/', '*']
     def arityOne = ['sin', 'cos', 'tan']
+    def vars = ['x','y','z']
+    def functionSet = arityOne + arityTwo + vars 
     def value
     def arity
     def isOperator
     def isVar
-
 
 
     def assignArity = { value ->
@@ -114,41 +115,62 @@ class Node {
     //    }
 
     def getRandomNode() {
-		Node firstNode = this
-		def r = (rand.nextInt(depth()))
-		def iterations = 0
-		return getRandomNodeRecursive(r, iterations, firstNode)
-	}
-	
-	def getRandomNodeRecursive(r, iterations, firstNode) {
-		//println("depth " + r)
-		//println("iterations " + iterations)
+        Node firstNode = this
+        def r = (rand.nextInt(depth()))
+        def iterations = 0
+        return getRandomNodeRecursive(r, iterations, firstNode)
+    }
+
+    def getRandomNodeRecursive(r, iterations, firstNode) {
+        //println("depth " + r)
+        //println("iterations " + iterations)
 
         int direction = rand.nextInt(2)
         if (iterations == r) {
             return this.clone()
         } else if (direction == 0) {
-			iterations++
+            iterations++
             if (left == null){
-				return firstNode.getRandomNodeRecursive(r, iterations, firstNode)
+                return firstNode.getRandomNodeRecursive(r, iterations, firstNode)
             }
             return left.getRandomNodeRecursive(r, iterations, firstNode)
         } else if (direction == 1) {
-			iterations++
+            iterations++
             if (right == null){
                 return firstNode.getRandomNodeRecursive(r, iterations, firstNode)
             }
             return right.getRandomNodeRecursive(r, iterations, firstNode)
         }
     }
-	//I don't know what I'm doing
-	def growTree(maxD) {
-		
-		if (depth() == maxD) {
-			return new Node (nextInt(valueLimit))
-		}
-	}
-	
+    
+    static makeTree(maxDepth){
+        Node temp = new Node('+')
+        return temp.generateRandomTree(maxDepth)
+    }
+    
+    def generateRandomTree(maxDepth, d = 0) {
+        def newNode
+        vars.add( rand.nextDouble().trunc(3) )
+        if (d == maxDepth) {
+            newNode = new Node(vars[rand.nextInt(vars.size)])
+            return newNode
+        } else {
+            newNode = new Node(functionSet[rand.nextInt(functionSet.size)])
+            if (newNode.arity == 0) {
+                return newNode
+            } else if (newNode.arity == 1){
+                newNode.right = generateRandomTree(maxDepth, d + 1)
+                return newNode
+            } else {
+                newNode.left = generateRandomTree(maxDepth, d + 1)
+                newNode.right = generateRandomTree(maxDepth, d + 1)
+                return newNode
+            }
+        }
+        
+        
+    }
+
     def size() {
 
         if (arity == 0) {
@@ -188,7 +210,7 @@ class Node {
         if (arity == 0) {
             return value.toString()
         } else if (arity == 1) {
-            return value.toString()+ "("+ right.toString() + ")"
+            return value.toString() + "("+ right.toString() + ")"
         }
         return "(" + left.toString() + " " +  value.toString() + " " + right.toString() + ")"
     }

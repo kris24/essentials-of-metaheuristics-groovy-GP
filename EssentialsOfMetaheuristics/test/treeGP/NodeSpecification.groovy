@@ -242,6 +242,21 @@ class NodeSpecification extends Specification {
         d2l1.depth() == 1
 
     }
+    
+    def 'test random tree generation'() {
+        when:
+        
+        def depth = 5
+        
+        
+        
+        then:
+        100.times{
+            def testNode = Node.makeTree(depth)
+//            testNode.depth() <= depth
+        }
+        
+    }
 
     def 'test random nodes'() {
         when:
