@@ -334,6 +334,47 @@ class NodeSpecification extends Specification {
         then:
         println(testNode)
         println(testNode.evaluate([x:400, y:24, z:300]))
+        println("   ")
+        
+    }
+    
+    def 'test crossover'() {
+        when:
+        
+        def testNodeShallow = Node.makeTree(4)
+        def testNodeDeep = Node.makeTree(16)
+        
+        def result = testNodeDeep.crossover(testNodeShallow)
+        
+        
+        then:
+        println("Short Tree")
+        println(testNodeShallow)
+        println(testNodeShallow.evaluate([x:4, y:24, z:300]))
+        println("Tall Tree")
+        println(testNodeDeep)
+        println(testNodeDeep.evaluate([x:4, y:24, z:300]))
+        println("Result")
+        println(result)
+        println(result.evaluate([x:4, y:24, z:300]))
+        
+    }
+    
+    def 'test mutate crossover'() {
+        when:
+        
+        def testNodeDeep = Node.makeTree(16)
+        
+        def result = testNodeDeep.mutate()
+        
+        
+        then:
+        println("Tall Tree")
+        println(testNodeDeep)
+        println(testNodeDeep.evaluate([x:4, y:24, z:300]))
+        println("Result")
+        println(result)
+        println(result.evaluate([x:4, y:24, z:300]))
         
     }
 	

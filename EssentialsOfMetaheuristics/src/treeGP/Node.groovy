@@ -11,7 +11,7 @@ class Node {
     def arityTwo = ['+', '-', '/', '*']
     def arityOne = ['sin', 'cos', 'tan']
     def vars = ['x','y','z']
-    def functionSet = arityOne + arityTwo + vars
+    def functionSet = arityOne + arityTwo + vars + arityOne + arityTwo
     def value
     def arity
     def isOperator
@@ -87,24 +87,23 @@ class Node {
     }
 
     def mutate() {
-
-        if (arity == 2) {
-            value = arityTwo[rand.nextInt(4)]
-        } else if (arity == 1) {
-            value = arityOne[rand.nextInt(3)]
-        }
+        def base = getRandomNode()
+        base = generateRandomTree(this.depth())
+        
 
 
 
     }
 
-    static Node crossover(Node a, Node b) {
+    Node crossover(a) {
 
         Node parentOne = a.clone()
-        Node parentTwo = b.clone()
+        Node parentTwo = this.clone()
 
         Node headOne = parentOne.getRandomNode()
         Node headTwo = parentTwo.getRandomNode()
+        
+        headOne.left = headTwo
 
     }
 
@@ -182,6 +181,9 @@ class Node {
     def depth() {
         if (arity == 0) {
             return 1
+        }
+        if (left == null) {
+            return right.depth() + 1
         }
         if (right.depth() > left.depth()) {
             return right.depth() + 1
