@@ -253,7 +253,6 @@ class NodeSpecification extends Specification {
         then:
         100.times{
             def testNode = Node.makeTree(depth)
-//            testNode.depth() <= depth
         }
         
     }
@@ -314,15 +313,28 @@ class NodeSpecification extends Specification {
 
 
         
-		println("GetRandomNode result breakdown:")
-        println("Percentage ((5 - 2) + (4 * 4)) occured: " + (timesWhole / tests)*100 + "%")
-        println("Percentage (5 - 2) occured: " + (timesLeft / tests)*100 + "%")
-        println("Percentage (4 * 4) occured: " + (timesRight / tests)*100 + "%")
-        println("Percentage 5 occured: " + (timesFive / tests)*100 + "%")
-        println("Percentage 2 occured: " + (timesTwo / tests)*100 + "%")
-        println("Percentage 4 occured: " + (timesFour / tests)*100 + "%")
-        (timesWhole + timesLeft + timesRight + timesFive + timesTwo + timesFour)/tests == 1
+//		println("GetRandomNode result breakdown:")
+//        println("Percentage ((5 - 2) + (4 * 4)) occured: " + (timesWhole / tests)*100 + "%")
+//        println("Percentage (5 - 2) occured: " + (timesLeft / tests)*100 + "%")
+//        println("Percentage (4 * 4) occured: " + (timesRight / tests)*100 + "%")
+//        println("Percentage 5 occured: " + (timesFive / tests)*100 + "%")
+//        println("Percentage 2 occured: " + (timesTwo / tests)*100 + "%")
+//        println("Percentage 4 occured: " + (timesFour / tests)*100 + "%")
+//        (timesWhole + timesLeft + timesRight + timesFive + timesTwo + timesFour)/tests == 1
 		println("  ")
+    }
+    
+    def 'test evaluateTree'() {
+        when:
+        
+        def testNode = Node.makeTree(4)
+        
+        
+        
+        then:
+        println(testNode)
+        println(testNode.evaluate([x:400, y:24, z:300]))
+        
     }
 	
 }

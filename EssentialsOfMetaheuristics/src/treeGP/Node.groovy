@@ -11,11 +11,12 @@ class Node {
     def arityTwo = ['+', '-', '/', '*']
     def arityOne = ['sin', 'cos', 'tan']
     def vars = ['x','y','z']
-    def functionSet = arityOne + arityTwo + vars 
+    def functionSet = arityOne + arityTwo + vars
     def value
     def arity
     def isOperator
     def isVar
+    
 
 
     def assignArity = { value ->
@@ -34,48 +35,54 @@ class Node {
         this.value = value
         arity = assignArity(value)
         isOperator = (arity != 0)
-        isVar = (!value.getClass() == String && !isOperator)
+        isVar = (value.getClass() == String && !isOperator)
     }
 
 
 
-    def evaluate() {
+    def evaluate(varMap) {
         if (arity == 0) {
+            if (isVar) {
+                return varMap.get(value)
+            }
             return value
         }
 
         if (arity == 1) {
             // all arity-one functions have their child stored in the right node
-            return evaluateArityOne(right)
+            return evaluateArityOne(right, varMap)
         } else if (arity == 2) {
-            return evaluateArityTwo(left, right)
+            return evaluateArityTwo(left, right, varMap)
         }
 
     }
 
 
-    def evaluateArityTwo(lNode, rNode) {
+    def evaluateArityTwo(lNode, rNode, varMap) {
         switch (value) {
             case '+':
-                return lNode.evaluate() + rNode.evaluate()
+                return lNode.evaluate(varMap) + rNode.evaluate(varMap)
             case '-':
-                return lNode.evaluate() - rNode.evaluate()
+                return lNode.evaluate(varMap) - rNode.evaluate(varMap)
             case '*':
-                return lNode.evaluate() * rNode.evaluate()
+                return lNode.evaluate(varMap) * rNode.evaluate(varMap)
             case '/':
-                return lNode.evaluate() / rNode.evaluate()
+                if (rNode.evaluate(varMap) == 0){
+                    return 1
+                }
+                return lNode.evaluate(varMap) / rNode.evaluate(varMap)
 
         }
     }
 
-    def evaluateArityOne(arg) {
+    def evaluateArityOne(arg, varMap) {
         switch (value) {
             case 'sin':
-                return Math.sin(arg.evaluate())
+                return Math.sin(arg.evaluate(varMap))
             case 'cos':
-                return Math.cos(arg.evaluate())
+                return Math.cos(arg.evaluate(varMap))
             case 'tan':
-                return Math.tan(arg.evaluate())
+                return Math.tan(arg.evaluate(varMap))
         }
     }
 
@@ -101,18 +108,7 @@ class Node {
 
     }
 
-    //    def getRandomNode(r = (rand.nextInt() % size())+1) {
-    ////        boolean returnLeaf = rand.nextInt(10) == 0
-    //
-    //        if (left != null && r < left.size()) {
-    //            return left.getRandomNode(r)
-    //        } else if (right != null && r > right.size()) {
-    //            return right.getRandomNode(r - (right.size() ))
-    //        } else {
-    //            return this.clone()
-    //        }
-    //
-    //    }
+    
 
     def getRandomNode() {
         Node firstNode = this
