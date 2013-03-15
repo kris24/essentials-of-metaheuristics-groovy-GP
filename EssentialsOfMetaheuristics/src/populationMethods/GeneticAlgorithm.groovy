@@ -1,5 +1,5 @@
 package populationMethods
-
+import treeGP.Node
 import java.util.Random
 import operators.Crossovers
 import operators.TournamentSelection
@@ -11,7 +11,7 @@ class GeneticAlgorithm {
 	def popsize = 100
 	
 	// Our Algorithm takes a Genetic Algorithm Problem, a desired population size
-	def maximize(problem, populationSize=popsize, selector=new TournamentSelection(), crossover=new Crossovers().onePointCrossover) {
+	def maximize(problem, populationSize=popsize, selector=new TournamentSelection()) {
 		popsize = populationSize
 	
 		def startingPopulation = [] as Set
@@ -26,7 +26,7 @@ class GeneticAlgorithm {
 		while(!problem.terminate(best, qualityOfBest)) {
 			for(def individual: startingPopulation) {
 				def newQuality = problem.quality(individual)
-				if(newQuality > qualityOfBest) {
+				if(newQuality < qualityOfBest) {
 					best = individual
 					qualityOfBest = newQuality
 				}
@@ -38,7 +38,7 @@ class GeneticAlgorithm {
 			for(i in 0..(popsize/2)) {
 				def parentA = selector.select(problem, startingPopulation as List)
 				def parentB = selector.select(problem, startingPopulation as List)
-				def children = crossover(parentA, parentB)
+				def children = Node.crossover(parentA, parentB)
 				endingPopulation.add(problem.tweak(children[0]))
 				endingPopulation.add(problem.tweak(children[1]))
 			}

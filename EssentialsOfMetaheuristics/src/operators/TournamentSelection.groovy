@@ -12,7 +12,7 @@ class TournamentSelection{
         for(i in 2..tournamentSize) {
             def n = population[r.nextInt(population.size())]
             def nQuality = problem.quality(n)
-            if(nQuality > sQuality){
+            if(nQuality < sQuality){
                 s = n
                 sQuality = nQuality
             }
