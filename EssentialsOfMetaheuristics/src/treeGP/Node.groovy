@@ -10,13 +10,12 @@ class Node {
 
     def arityTwo = ['+', '-', '/', '*']
     def arityOne = ['sin', 'cos', 'tan']
-    def vars = ['x','y','z']
-    def functionSet = arityOne + arityTwo + vars + arityOne + arityTwo
+    def vars
     def value
     def arity
     def isOperator
     def isVar
-    
+    def functionSet = arityOne + arityTwo + vars
 
 
     def assignArity = { value ->
@@ -30,8 +29,8 @@ class Node {
     }
 
 
-    //remove nullnode entirely, it doesn't seem to work
-    def Node(value) {
+    def Node(value, vars = ['x']) {
+        this.vars = vars
         this.value = value
         arity = assignArity(value)
         isOperator = (arity != 0)
@@ -89,13 +88,22 @@ class Node {
     def mutate() {
         def base = getRandomNode()
         base = generateRandomTree(this.depth())
-        
-
-
-
     }
 
-    Node crossover(a) {
+    def function(rangeStart, rangeEnd, samples) {
+        def step = (rangeEnd - rangeStart)/samples
+        def results = []
+        
+        for(double i = rangeStart; i <= rangeEnd; i += step) {
+            results.add(evaluate([x:i]))
+        }
+        
+      return results
+        
+    }
+    
+    
+    def crossover(a) {
 
         Node parentOne = a.clone()
         Node parentTwo = this.clone()
@@ -145,12 +153,12 @@ class Node {
     
     def generateRandomTree(maxDepth, d = 0) {
         def newNode
-        vars.add( rand.nextDouble().trunc(3) )
+        //vars.add( rand.nextDouble().trunc(3) )
         if (d == maxDepth) {
-            newNode = new Node(vars[rand.nextInt(vars.size)])
+            newNode = new Node(vars[rand.nextInt(vars.size)], vars)
             return newNode
         } else {
-            newNode = new Node(functionSet[rand.nextInt(functionSet.size)])
+            newNode = new Node(functionSet[rand.nextInt(functionSet.size)], vars)
             if (newNode.arity == 0) {
                 return newNode
             } else if (newNode.arity == 1){
@@ -192,7 +200,7 @@ class Node {
     }
 
     def clone() {
-        Node head = new Node(value)
+        Node head = new Node(value, vars)
         if (left != null) {
             head.left = left.clone()
         }

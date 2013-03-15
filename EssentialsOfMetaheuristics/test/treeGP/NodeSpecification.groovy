@@ -321,7 +321,7 @@ class NodeSpecification extends Specification {
 //        println("Percentage 2 occured: " + (timesTwo / tests)*100 + "%")
 //        println("Percentage 4 occured: " + (timesFour / tests)*100 + "%")
 //        (timesWhole + timesLeft + timesRight + timesFive + timesTwo + timesFour)/tests == 1
-		println("  ")
+		print('')
     }
     
     def 'test evaluateTree'() {
@@ -332,9 +332,9 @@ class NodeSpecification extends Specification {
         
         
         then:
-        println(testNode)
-        println(testNode.evaluate([x:400, y:24, z:300]))
-        println("   ")
+        //println(testNode)
+        //println(testNode.evaluate([x:400, y:24, z:300]))
+        print('')
         
     }
     
@@ -348,19 +348,20 @@ class NodeSpecification extends Specification {
         
         
         then:
-        println("Short Tree")
-        println(testNodeShallow)
-        println(testNodeShallow.evaluate([x:4, y:24, z:300]))
-        println("Tall Tree")
-        println(testNodeDeep)
-        println(testNodeDeep.evaluate([x:4, y:24, z:300]))
-        println("Result")
-        println(result)
-        println(result.evaluate([x:4, y:24, z:300]))
+        print('')
+//        println("Short Tree")
+//        println(testNodeShallow)
+//        println(testNodeShallow.evaluate([x:4, y:24, z:300]))
+//        println("Tall Tree")
+//        println(testNodeDeep)
+//        println(testNodeDeep.evaluate([x:4, y:24, z:300]))
+//        println("Result")
+//        println(result)
+//        println(result.evaluate([x:4, y:24, z:300]))
         
     }
     
-    def 'test mutate crossover'() {
+    def 'test mutate'() {
         when:
         
         def testNodeDeep = Node.makeTree(16)
@@ -369,12 +370,29 @@ class NodeSpecification extends Specification {
         
         
         then:
-        println("Tall Tree")
+        print('')
+//        println("Tall Tree")
+//        println(testNodeDeep)
+//        println(testNodeDeep.evaluate([x:4, y:24, z:300]))
+//        println("Result")
+//        println(result)
+//        println(result.evaluate([x:4, y:24, z:300]))
+        
+    }
+    
+    def 'test function'() {
+        when:
+        
+        def testNodeDeep = Node.makeTree(5)
+        
+        def result = testNodeDeep.function(0, 6.235, 100)
+        
+        
+        then:
         println(testNodeDeep)
-        println(testNodeDeep.evaluate([x:4, y:24, z:300]))
-        println("Result")
-        println(result)
-        println(result.evaluate([x:4, y:24, z:300]))
+        for (r in result) {
+            println(r)
+        }
         
     }
 	
