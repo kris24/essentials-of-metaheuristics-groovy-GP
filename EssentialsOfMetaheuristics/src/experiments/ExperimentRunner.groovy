@@ -10,7 +10,7 @@ class ExperimentRunner {
             for (s in searchers) {
                 for (i in 0..<numRuns) {
                     p.evalCount = 0
-                    def result = s.maximize(p)
+                    def result = s.minimize(p)
                     println "${s.toString()}\t${p.toString()}\t${p.quality(result)}\t${result}"
                 }
             }

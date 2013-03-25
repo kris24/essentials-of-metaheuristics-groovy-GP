@@ -11,7 +11,7 @@ class GeneticAlgorithm {
 	def popsize = 100
 	
 	// Our Algorithm takes a Genetic Algorithm Problem, a desired population size
-	def maximize(problem, populationSize=popsize, selector=new TournamentSelection()) {
+	def minimize(problem, populationSize=popsize, selector=new TournamentSelection()) {
 		popsize = populationSize
 	
 		def startingPopulation = [] as Set
