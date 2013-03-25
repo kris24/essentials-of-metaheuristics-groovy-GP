@@ -49,9 +49,9 @@ class SinApproximation {
 		evalCount++
         def total = 0
         def result = n.function(rangeStart, rangeEnd, samples)
-        for (i in sinPoints.size()-1) {
-            def q = Math.abs(sinPoints.get(i) - result.get(i))
-            println("SinPoints, Result  " + sinPoints.get(i) + ', ' + result.get(i))
+        for (int i = 0; i < sinPoints.size(); i++) {
+            def q = Math.abs(sinPoints[i] - result.get(i))
+            println("SinPoints, Result  " + sinPoints[i] + ', ' + result[i] + ', ' + i)
             total += q
         }
         return total/sinPoints.size()*100
