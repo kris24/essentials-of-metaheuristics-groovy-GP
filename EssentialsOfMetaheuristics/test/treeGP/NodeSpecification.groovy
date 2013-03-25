@@ -344,7 +344,7 @@ class NodeSpecification extends Specification {
         def testNodeShallow = Node.makeTree(4)
         def testNodeDeep = Node.makeTree(16)
         
-        def result = testNodeDeep.crossover(testNodeShallow)
+        def result = crossover(testNodeShallow, testNodeDeep)
         
         
         then:
@@ -383,15 +383,23 @@ class NodeSpecification extends Specification {
     def 'test function'() {
         when:
         
-        def testNodeDeep = Node.makeTree(5)
+        def testNode = new Node('sin')
+        testNode.right = new Node('x')
         
-        def result = testNodeDeep.function(0, 6.235, 100)
+        def result = testNode.function(0, Math.PI*2, 100)
+        
+        def sinPoints = []
+        def step = (Math.PI*2 - 0)/100
+        for (double i = 0 ; i < Math.PI*2; i += step) {
+            sinPoints.add(Math.sin(i))
+        }
         
         
         then:
-        println(testNodeDeep)
-        for (r in result) {
-            println(r)
+        println(testNode)
+        sinPoints.size() == result.size()
+        for (i in 0..result.size()-1) {
+            result.get(i) == sinPoints.get(i)
         }
         
     }

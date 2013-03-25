@@ -1,8 +1,7 @@
 package experiments
 
 import problems.SinApproximation
-import singleStateMethods.HillClimber
-import singleStateMethods.SteepestAscentHillClimber
+import populationMethods.GeneticAlgorithm
 
 class ExperimentRunner {
 
@@ -20,14 +19,11 @@ class ExperimentRunner {
 
     static main(args) {
         def searchers = [
-            new HillClimber(),
-            new SteepestAscentHillClimber(numGradientSamples : 1),
-            new SteepestAscentHillClimber(numGradientSamples : 2),
-            new SteepestAscentHillClimber(numGradientSamples : 4),
+            new GeneticAlgorithm()
         ]
         def problems = [
             
-            new SinApproximation()
+            new SinApproximation(treeDepth: 3)
         ]
         // It would be nice to collect the total time here and include it in the
         // output.
