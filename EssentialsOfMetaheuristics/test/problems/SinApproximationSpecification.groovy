@@ -12,4 +12,14 @@ class SinApproximationSpecification extends Specification {
         
     }
     
+    def 'test quality'() {
+        expect:
+        def prob1 = sa.create()
+        println(sa.quality(prob1))
+        println(prob1)
+        
+    }
+    
+    
+    
 }

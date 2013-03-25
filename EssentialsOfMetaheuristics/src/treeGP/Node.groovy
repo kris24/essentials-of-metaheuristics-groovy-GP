@@ -9,7 +9,7 @@ class Node {
     Node left
 
     def arityTwo = ['+', '-', '/', '*']
-    def arityOne = ['sin', 'cos', 'tan']
+    def arityOne = [/*'sin', 'cos', 'tan'*/]
     def vars
     def value
     def arity
@@ -159,7 +159,7 @@ class Node {
     
     def generateRandomTree(maxDepth, d = 0) {
         def newNode
-        //vars.add( rand.nextDouble().trunc(3) )
+        vars.add( rand.nextDouble().trunc(3) )
         if (d == maxDepth) {
             newNode = new Node(vars[rand.nextInt(vars.size)], vars)
             return newNode
