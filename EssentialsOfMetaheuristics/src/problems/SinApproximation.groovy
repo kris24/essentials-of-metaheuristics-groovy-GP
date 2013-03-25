@@ -7,7 +7,7 @@ class SinApproximation {
     def rangeStart = 0.0
     def rangeEnd = Math.PI*2
     def samples = 100.0
-    def maxIterations = 1000
+    def maxIterations = 20
     def evalCount = 0
     def sinPoints = getSinPoints()
     def treeDepth = 5
@@ -34,7 +34,7 @@ class SinApproximation {
     }
 
     def terminate = { best, bestQ ->
-        evalCount >= maxIterations || bestQ == 0
+        evalCount >= maxIterations || bestQ == 0.0
     }
 
     def tweak = { n ->
@@ -52,6 +52,7 @@ class SinApproximation {
         for (int i = 0; i < sinPoints.size(); i++) {
             def q = Math.abs(sinPoints[i] - result.get(i))
             println("SinPoints, Result  " + sinPoints[i] + ', ' + result[i] + ', ' + i)
+			println(evalCount)
             total += q
         }
         return total/sinPoints.size()*100
