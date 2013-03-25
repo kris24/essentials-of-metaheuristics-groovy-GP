@@ -105,13 +105,19 @@ class Node {
     
     static crossover(a, b) {
 
-        Node parentOne = a.clone()
-        Node parentTwo = b.clone()
+        Node parentOne = a
+        Node parentTwo = b
 
         Node headOne = parentOne.getRandomNode()
         Node headTwo = parentTwo.getRandomNode()
         
-        headOne.left = headTwo
+        def child1 = headOne.clone()
+        child1.left = headTwo.clone()
+        
+        def child2 = headTwo.clone()
+        child2.left = headOne.clone()
+        
+        return [child1, child2]
 
     }
 
