@@ -5,7 +5,7 @@ import populationMethods.GeneticAlgorithm
 
 class ExperimentRunner {
 
-    static runExperiment(searchers, problems, numRuns = 30) {
+    static runExperiment(searchers, problems, numRuns = 1) {
         for (p in problems) {
             for (s in searchers) {
                 for (i in 0..<numRuns) {

@@ -9,17 +9,24 @@ class SinApproximation {
     def samples = 100.0
     def maxIterations = 1000
     def evalCount = 0
-    def sinPoints = []
+    def sinPoints = getSinPoints()
     def treeDepth = 5
+	
+	def getSinPoints() {
+		
+		def points = []
+		def counter = 0		
+			def step = (rangeEnd - rangeStart)/samples
+			for (double i = rangeStart; i < rangeEnd; i += step) {
+				points.add(Math.sin(i))
+				//println(points.last() + ", " + counter++)
+			}
+		
+		return points
+	}
 
     def create = {
         Node.makeTree(treeDepth)
-        if (sinPoints.size() == 0) {
-            def step = (rangeEnd - rangeStart)/samples
-            for (double i = rangeStart; i < rangeEnd; i += step) {
-                sinPoints.add(Math.sin(i))
-            }
-        }
     }
 
     def random = {
@@ -39,13 +46,12 @@ class SinApproximation {
     }
 
     def quality = { n ->
-        evalCount++
+		evalCount++
         def total = 0
         def result = n.function(rangeStart, rangeEnd, samples)
-        
         for (i in sinPoints.size()-1) {
             def q = Math.abs(sinPoints.get(i) - result.get(i))
-            println(sinPoints.get(i) + ', ' + result.get(i))
+            println("SinPoints, Result  " + sinPoints.get(i) + ', ' + result.get(i))
             total += q
         }
         return total/sinPoints.size()*100
