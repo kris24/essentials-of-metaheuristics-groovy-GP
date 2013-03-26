@@ -34,8 +34,8 @@ class SinApproximation {
     }
 
     def terminate = { best, bestQ ->
-		evalCount++
-		println("in terminate: " + evalCount)
+		//evalCount++
+		//println("in terminate: " + evalCount)
         evalCount >= maxIterations || bestQ == 0.0
     }
 
@@ -52,12 +52,15 @@ class SinApproximation {
         def result = n.function(rangeStart, rangeEnd, samples)
         for (int i = 0; i < sinPoints.size(); i++) {
             def q = Math.abs(sinPoints[i] - result.get(i))
-            println("SinPoints, Result  " + sinPoints[i] + ', ' + result[i] + ', ' + i)
-			println(evalCount)
+            //println("SinPoints, Result  " + sinPoints[i] + ', ' + result[i] + ', ' + i)
+			//println(evalCount)
             total += q
         }
-		println("Quality = " + total/sinPoints.size()*100)
-        return total/sinPoints.size()*100
+        
+        evalCount++
+        
+		//println("Quality = " + total/sinPoints.size()*100)
+        return total/sinPoints.size()
 
     }
     

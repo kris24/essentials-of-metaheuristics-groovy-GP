@@ -9,13 +9,13 @@ class Node {
     Node left
 
     def arityTwo = ['+', '-', '/', '*']
-    def arityOne = [/*'sin', 'cos', 'tan'*/]
+    def arityOne = [/*'sin', */'cos', 'tan']
     def vars
     def value
     def arity
     def isOperator
     def isVar
-    def functionSet = arityOne + arityTwo + vars
+    def functionSet = arityOne + arityTwo + vars 
 
 
     def assignArity = { value ->
@@ -87,7 +87,7 @@ class Node {
 
     def mutate() {
         def base = getRandomNode()
-        base = generateRandomTree(this.depth())
+        base = generateRandomTree(base.depth())
     }
 
     def function(rangeStart, rangeEnd, samples) {
@@ -159,12 +159,14 @@ class Node {
     
     def generateRandomTree(maxDepth, d = 0) {
         def newNode
-        vars.add( rand.nextDouble().trunc(3) )
+        vars.add( rand.nextInt(2)-rand.nextDouble().trunc(2) )
+        vars.add('x')
+        
         if (d == maxDepth) {
             newNode = new Node(vars[rand.nextInt(vars.size)], vars)
             return newNode
         } else {
-            newNode = new Node(functionSet[rand.nextInt(functionSet.size)], vars)
+            newNode = new Node(functionSet[rand.nextInt(functionSet.size)], vars )
             if (newNode.arity == 0) {
                 return newNode
             } else if (newNode.arity == 1){

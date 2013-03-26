@@ -5,7 +5,7 @@ import populationMethods.GeneticAlgorithm
 
 class ExperimentRunner {
 
-    static runExperiment(searchers, problems, numRuns = 1) {
+    static runExperiment(searchers, problems, numRuns = 30) {
         for (p in problems) {
             for (s in searchers) {
                 for (i in 0..<numRuns) {
@@ -23,7 +23,7 @@ class ExperimentRunner {
         ]
         def problems = [
             
-            new SinApproximation(treeDepth: 3)
+            new SinApproximation(treeDepth: 4)
         ]
         // It would be nice to collect the total time here and include it in the
         // output.
