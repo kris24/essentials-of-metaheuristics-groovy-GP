@@ -1,5 +1,4 @@
 package populationMethods
-import treeGP.Node
 import java.util.Random
 import operators.Crossovers
 import operators.TournamentSelection

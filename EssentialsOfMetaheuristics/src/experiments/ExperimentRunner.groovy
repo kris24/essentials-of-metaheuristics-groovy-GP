@@ -1,6 +1,6 @@
 package experiments
 
-import problems.SinApproximation
+
 import populationMethods.GeneticAlgorithm
 
 class ExperimentRunner {
@@ -23,7 +23,7 @@ class ExperimentRunner {
         ]
         def problems = [
             
-            new SinApproximation(treeDepth: 4)
+
         ]
         // It would be nice to collect the total time here and include it in the
         // output.
