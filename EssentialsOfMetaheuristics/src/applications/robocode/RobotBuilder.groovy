@@ -1,6 +1,5 @@
 package applications.robocode
 
-//shamelessly stolen from Nic Mcphee
 import groovy.text.SimpleTemplateEngine
 
 class RobotBuilder {
@@ -13,11 +12,37 @@ class RobotBuilder {
         template = engine.createTemplate(new File(templateFileName))
     }
     
+    def buildJarFile(values) {
+        buildClassFile(values)
+        buildPropertiesFile(values)
+        def id = values['id']
+        def fileNamePrefix = "Individual_${id}"
+        def command = "jar -cf ${fileNamePrefix}.jar"
+        [".java", ".class", "\$MicroEnemy.class", ".properties"].each { suffix ->
+            command += " ${robotPackage}/${fileNamePrefix}${suffix}"
+        }
+        def proc = command.execute(null, new File(robotDirectory))
+        proc.waitFor()
+        println(proc.in.text)
+        assert proc.err.text.equals("")
+        assert proc.exitValue() == 0
+    }
+    
+    def buildPropertiesFile(values) {
+        def id = values['id']
+        def filenamePrefix = "Individual_${id}"
+        def propertiesFileName = "${filenamePrefix}.properties"
+        def propertiesFile = new File("${robotDirectory}/${robotPackage}/${propertiesFileName}")
+        propertiesFile << "robots: ${robotPackage}/${filenamePrefix}.class"
+    }
+    
     def buildClassFile(values) {
         def javaFileName = buildJavaFile(values)
         def command = "javac -cp ../lib/robocode.jar ${robotPackage}/${javaFileName}"
         def proc = command.execute(null, new File(robotDirectory))
         proc.waitFor()
+        assert proc.err.text.equals("")
+        assert proc.exitValue() == 0
 //        println "return code: ${proc.exitValue()}"
 //        println "stderr: ${proc.err.text}"
 //        println "stdout: ${proc.in.text}"
