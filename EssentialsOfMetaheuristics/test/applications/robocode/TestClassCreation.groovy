@@ -54,7 +54,7 @@ class TestClassCreation extends Specification {
      */
     def "Confirm that we can create a Java class file for an individual"() {
         given:
-        def values = ["id" : id, "enemy_energy" : enemy_energy, "my_energy" : my_energy, "angle_diff" : angle_diff, "distance" : distance]
+        def values = ["id" : id] //, "enemy_energy" : enemy_energy, "my_energy" : my_energy, "angle_diff" : angle_diff, "distance" : distance]
 
         when:
         robotBuilder.buildClassFile(values)
@@ -75,7 +75,7 @@ class TestClassCreation extends Specification {
      */
     def "Confirm that we can create a jar file for an individual"() {
         given:
-        def values = ["id" : id, "enemy_energy" : enemy_energy, "my_energy" : my_energy, "angle_diff" : angle_diff, "distance" : distance]
+        def values = ["id" : id] //, "enemy_energy" : enemy_energy, "my_energy" : my_energy, "angle_diff" : angle_diff, "distance" : distance]
 
         when:
         robotBuilder.buildJarFile(values)
@@ -98,12 +98,12 @@ class TestClassCreation extends Specification {
             (line.indexOf("public class") >= 0) || (line.indexOf("eval += ") >= 0)
         }
         // There's actually a sixth matching line because of the MicroEnemy inner class
-        assert interestingLines.size() == 6
+//        assert interestingLines.size() == 6
         assert interestingLines[0].indexOf("DarkSoul_${id}") >= 0
-        assert interestingLines[1].indexOf("eval += (${enemy_energy})") >= 0
-        assert interestingLines[2].indexOf("eval += (${my_energy})") >= 0
-        assert interestingLines[3].indexOf("eval += (${angle_diff})") >= 0
-        assert interestingLines[4].indexOf("eval += (${distance})") >= 0
+//        assert interestingLines[1].indexOf("eval += (${enemy_energy})") >= 0
+//        assert interestingLines[2].indexOf("eval += (${my_energy})") >= 0
+//        assert interestingLines[3].indexOf("eval += (${angle_diff})") >= 0
+//        assert interestingLines[4].indexOf("eval += (${distance})") >= 0
         return true
     }
 
@@ -118,7 +118,7 @@ class TestClassCreation extends Specification {
         assert file.exists()
         def entryNames = new JarFile(file).entries().collect { it.name }
         def targets = ["evolved/DarkSoul_${id}.class", 
-            "evolved/DarkSoul${id}\$MicroEnemy.class", 
+            //"evolved/DarkSoul${id}\$MicroEnemy.class", 
             "evolved/DarkSoul_${id}.java",
             "evolved/DarkSoul_${id}.properties"]
         entryNames.containsAll(targets)
@@ -131,7 +131,7 @@ class TestClassCreation extends Specification {
 
     def removeClassFile() {
         new File("evolved_robots/evolved/DarkSoul_${id}.class").delete()
-        new File("evolved_robots/evolved/DarkSOul_${id}\$MicroEnemy.class").delete()
+        //new File("evolved_robots/evolved/DarkSOul_${id}\$MicroEnemy.class").delete()
     }
     
     def removePropertiesFile() {

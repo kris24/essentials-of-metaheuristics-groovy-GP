@@ -27,11 +27,11 @@ class TestRoboCodeBattle extends Specification {
 	def setup() {
 		Random random = new Random()
 		id = random.nextInt(1000000)
-		enemy_energy = random.nextFloat() * 100
-		my_energy = random.nextFloat() * 100
-		angle_diff = random.nextFloat() * 100
-		distance = random.nextFloat() * 100
-        def values = ["id" : id, "enemy_energy" : enemy_energy, "my_energy" : my_energy, "angle_diff" : angle_diff, "distance" : distance]
+//		enemy_energy = random.nextFloat() * 100
+//		my_energy = random.nextFloat() * 100
+//		angle_diff = random.nextFloat() * 100
+//		distance = random.nextFloat() * 100
+        def values = ["id" : id] // , "enemy_energy" : enemy_energy, "my_energy" : my_energy, "angle_diff" : angle_diff, "distance" : distance]
 
 		robotBuilder = new RobotBuilder("templates/IterativeLinearTargeting.template")
 		robotBuilder.buildJarFile(values)
