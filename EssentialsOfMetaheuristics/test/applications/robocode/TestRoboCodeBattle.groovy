@@ -33,7 +33,7 @@ class TestRoboCodeBattle extends Specification {
 		distance = random.nextFloat() * 100
         def values = ["id" : id, "enemy_energy" : enemy_energy, "my_energy" : my_energy, "angle_diff" : angle_diff, "distance" : distance]
 
-		robotBuilder = new RobotBuilder("templates/HawkOnFireOS.template")
+		robotBuilder = new RobotBuilder("templates/IterativeLinearTargeting.template")
 		robotBuilder.buildJarFile(values)
 		
 		battleRunner = new BattleRunner("templates/battle.template")
@@ -66,7 +66,7 @@ class TestRoboCodeBattle extends Specification {
         }
         assert interestingLines.size() == 1
 		assert interestingLines[0].indexOf("sample.Walls") >= 0
-        assert interestingLines[0].indexOf("evolved.Individual_${id}") >= 0
+        assert interestingLines[0].indexOf("evolved.DarkSoul_${id}") >= 0
         return true
 	}
 }

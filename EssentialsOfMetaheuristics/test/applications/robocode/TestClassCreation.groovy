@@ -25,7 +25,7 @@ class TestClassCreation extends Specification {
         my_energy = random.nextFloat() * 100
         angle_diff = random.nextFloat() * 100
         distance = random.nextFloat() * 100
-        robotBuilder = new RobotBuilder("templates/HawkOnFireOS.template")
+        robotBuilder = new RobotBuilder("templates/IterativeLinearTargeting.template")
     }
 
     /*
@@ -92,14 +92,14 @@ class TestClassCreation extends Specification {
     }
 
     def confirmJavaFileExists() {
-        File file = new File("evolved_robots/evolved/Individual_${id}.java")
+        File file = new File("evolved_robots/evolved/DarkSoul_${id}.java")
         def contents = file.readLines()
         def interestingLines = contents.findAll { line ->
             (line.indexOf("public class") >= 0) || (line.indexOf("eval += ") >= 0)
         }
         // There's actually a sixth matching line because of the MicroEnemy inner class
         assert interestingLines.size() == 6
-        assert interestingLines[0].indexOf("Individual_${id}") >= 0
+        assert interestingLines[0].indexOf("DarkSoul_${id}") >= 0
         assert interestingLines[1].indexOf("eval += (${enemy_energy})") >= 0
         assert interestingLines[2].indexOf("eval += (${my_energy})") >= 0
         assert interestingLines[3].indexOf("eval += (${angle_diff})") >= 0
@@ -108,33 +108,33 @@ class TestClassCreation extends Specification {
     }
 
     def confirmClassFileExists() {
-        File file = new File("evolved_robots/evolved/Individual_${id}.class")
+        File file = new File("evolved_robots/evolved/DarkSoul_${id}.class")
         assert file.exists()
         return true
     }
     
     def confirmJarFileExists() {
-        File file = new File("evolved_robots/Individual_${id}.jar")
+        File file = new File("evolved_robots/DarkSoul_${id}.jar")
         assert file.exists()
         def entryNames = new JarFile(file).entries().collect { it.name }
-        def targets = ["evolved/Individual_${id}.class", 
-            "evolved/Individual${id}\$MicroEnemy.class", 
-            "evolved/Individual_${id}.java",
-            "evolved/Individual_${id}.properties"]
+        def targets = ["evolved/DarkSoul_${id}.class", 
+            "evolved/DarkSoul${id}\$MicroEnemy.class", 
+            "evolved/DarkSoul_${id}.java",
+            "evolved/DarkSoul_${id}.properties"]
         entryNames.containsAll(targets)
         return true
     }
     
     def removeJavaFile() {
-        new File("evolved_robots/evolved/Individual_${id}.java").delete()
+        new File("evolved_robots/evolved/DarkSoul_${id}.java").delete()
     }
 
     def removeClassFile() {
-        new File("evolved_robots/evolved/Individual_${id}.class").delete()
-        new File("evolved_robots/evolved/Individual_${id}\$MicroEnemy.class").delete()
+        new File("evolved_robots/evolved/DarkSoul_${id}.class").delete()
+        new File("evolved_robots/evolved/DarkSOul_${id}\$MicroEnemy.class").delete()
     }
     
     def removePropertiesFile() {
-        new File("evolved_robots/evolved/Individual_${id}.properties").delete()
+        new File("evolved_robots/evolved/DarkSoul_${id}.properties").delete()
     }
 }

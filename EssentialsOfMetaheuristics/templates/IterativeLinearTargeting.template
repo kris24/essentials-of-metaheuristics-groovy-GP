@@ -8,8 +8,9 @@ import java.util.Enumeration;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.Point2D;
 
-//  HawkOnFire - a robot by rozu
+//  Based from HawkOnFire - a robot by rozu
 //  With evolved evaluate() component by Nic McPhee
+//  Implementing Iterative Linear Targeting from RoboWiki http://robowiki.net/wiki/Linear_Targeting
 
 /*
  * This template has the following fields that need to be filled in:
@@ -141,24 +142,42 @@ public class DarkSoul_${id} extends AdvancedRobot
 //- scan event ------------------------------------------------------------------------------------------------------------------------------
 	public void onScannedRobot(ScannedRobotEvent e)
 	{
-		MicroEnemy en = enemies.get(e.getName());
-		
-		if(en == null){
-			en = new MicroEnemy();
-			enemies.put(e.getName(), en);
+		double bulletPower = Math.min(3.0,getEnergy());
+		double myX = getX();
+		double myY = getY();
+		double absoluteBearing = getHeadingRadians() + e.getBearingRadians();
+		double enemyX = getX() + e.getDistance() * Math.sin(absoluteBearing);
+		double enemyY = getY() + e.getDistance() * Math.cos(absoluteBearing);
+		double enemyHeading = e.getHeadingRadians();
+		double enemyVelocity = e.getVelocity();
+		 
+		 
+		double deltaTime = 0;
+		double battleFieldHeight = getBattleFieldHeight(), 
+		       battleFieldWidth = getBattleFieldWidth();
+		double predictedX = enemyX, predictedY = enemyY;
+		while((++deltaTime) * (20.0 - 3.0 * bulletPower) < 
+		      Point2D.Double.distance(myX, myY, predictedX, predictedY)){		
+			predictedX += Math.sin(enemyHeading) * enemyVelocity;	
+			predictedY += Math.cos(enemyHeading) * enemyVelocity;
+			if(	predictedX < 18.0 
+				|| predictedY < 18.0
+				|| predictedX > battleFieldWidth - 18.0
+				|| predictedY > battleFieldHeight - 18.0){
+				predictedX = Math.min(Math.max(18.0, predictedX), 
+		                    battleFieldWidth - 18.0);	
+				predictedY = Math.min(Math.max(18.0, predictedY), 
+		                    battleFieldHeight - 18.0);
+				break;
+			}
 		}
-		
-		en.energy = e.getEnergy();
-		en.live = true;
-		en.pos = calcPoint(myPos, e.getDistance(), getHeadingRadians() + e.getBearingRadians());
-		
-		// normal target selection: the one closer to you is the most dangerous so attack him
-		if(!target.live || e.getDistance() < myPos.distance(target.pos)) {
-			target = en;
-		}
-		
-		// locks the radar if there is only one opponent left
-		if(getOthers()==1)	setTurnRadarLeftRadians(getRadarTurnRemainingRadians());
+		double theta = Utils.normalAbsoluteAngle(Math.atan2(
+		    predictedX - getX(), predictedY - getY()));
+		 
+		setTurnRadarRightRadians(
+		    Utils.normalRelativeAngle(absoluteBearing - getRadarHeadingRadians()));
+		setTurnGunRightRadians(Utils.normalRelativeAngle(theta - getGunHeadingRadians()));
+		fire(bulletPower);
 	}
 	
 //- minor events ----------------------------------------------------------------------------------------------------------------------------
