@@ -7,21 +7,16 @@ import java.awt.Color;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.Point2D;
 
-//  With evolved evaluate() component by Nic McPhee
-//  Implementing Iterative Linear Targeting from RoboWiki http://robowiki.net/wiki/Linear_Targeting
+//  Based on work by Nic McPhee
+//  Implements Iterative Linear Targeting from RoboWiki http://robowiki.net/wiki/Linear_Targeting
 //  Implements Oldest Scanned Radar from RoboWiki http://robowiki.net/wiki/Melee_Radar
 
 /*
  * This template has the following fields that need to be filled in:
  *   id : an id used in the generation of the name of the class.
- *   enemy_energy : the coefficient for the enemy's energy
- *   my_energy : the coefficient for our energy
- *   angle_diff : the coefficient for the different in angles between us and the point and then and the point
- *   distance : the coefficient for the distance between the point and the enemy
  */
  
-public class DarkSoul_${id} extends AdvancedRobot
-{
+public class DarkSoul_${id} extends AdvancedRobot {
 	
 	// Oldest Scanned Radar
 	static LinkedHashMap<String, Double> enemyHashMap;
@@ -46,10 +41,12 @@ public class DarkSoul_${id} extends AdvancedRobot
     	}
 	}
 	
+//- on enemy death ---------------------------------------------------------------------------------------------
 	public void onRobotDeath(RobotDeathEvent e) {
     enemyHashMap.remove(e.getName());
     sought = null;
 	}
+	
 //- scan event ------------------------------------------------------------------------------------------------------------------------------
 	public void onScannedRobot(ScannedRobotEvent e){
 		String name = e.getName();

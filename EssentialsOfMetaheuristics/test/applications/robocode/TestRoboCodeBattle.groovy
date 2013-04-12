@@ -26,7 +26,7 @@ class TestRoboCodeBattle extends Specification {
 
 	def setup() {
 		Random random = new Random()
-		id = random.nextInt(1000000)
+		id = random.nextInt(10000)
 //		enemy_energy = random.nextFloat() * 100
 //		my_energy = random.nextFloat() * 100
 //		angle_diff = random.nextFloat() * 100
