@@ -12,15 +12,17 @@ class TestClassCreation extends Specification {
      * distance : the coefficient for the distance between the point and the enemy
      */
     def id
-    def enemy_energy
-    def my_energy
-    def angle_diff
-    def distance
+	def code
+//    def enemy_energy
+//    def my_energy
+//    def angle_diff
+//    def distance
     def robotBuilder
 
     def setup() {
         Random random = new Random()
-        id = random.nextInt(1000000)
+        id = random.nextInt(1000)
+		code = "ahead(10);"
         enemy_energy = random.nextFloat() * 100
         my_energy = random.nextFloat() * 100
         angle_diff = random.nextFloat() * 100
@@ -35,7 +37,7 @@ class TestClassCreation extends Specification {
      */
     def "Confirm that we can create a Java source file for an individual"() {
         given:
-        def values = ["id" : id, "enemy_energy" : enemy_energy, "my_energy" : my_energy, "angle_diff" : angle_diff, "distance" : distance]
+        def values = ["id" : id, "code" : code]//, "enemy_energy" : enemy_energy, "my_energy" : my_energy, "angle_diff" : angle_diff, "distance" : distance]
 
         when:
         robotBuilder.buildJavaFile(values)
@@ -54,7 +56,7 @@ class TestClassCreation extends Specification {
      */
     def "Confirm that we can create a Java class file for an individual"() {
         given:
-        def values = ["id" : id] //, "enemy_energy" : enemy_energy, "my_energy" : my_energy, "angle_diff" : angle_diff, "distance" : distance]
+        def values = ["id" : id, "code" : code] //, "enemy_energy" : enemy_energy, "my_energy" : my_energy, "angle_diff" : angle_diff, "distance" : distance]
 
         when:
         robotBuilder.buildClassFile(values)
@@ -75,7 +77,7 @@ class TestClassCreation extends Specification {
      */
     def "Confirm that we can create a jar file for an individual"() {
         given:
-        def values = ["id" : id] //, "enemy_energy" : enemy_energy, "my_energy" : my_energy, "angle_diff" : angle_diff, "distance" : distance]
+        def values = ["id" : id, "code" : code] //, "enemy_energy" : enemy_energy, "my_energy" : my_energy, "angle_diff" : angle_diff, "distance" : distance]
 
         when:
         robotBuilder.buildJarFile(values)
