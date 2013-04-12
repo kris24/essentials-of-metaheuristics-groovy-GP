@@ -27,7 +27,7 @@ class TestClassCreation extends Specification {
         my_energy = random.nextFloat() * 100
         angle_diff = random.nextFloat() * 100
         distance = random.nextFloat() * 100
-        robotBuilder = new RobotBuilder("templates/IterativeLinearTargeting.template")
+        robotBuilder = new RobotBuilder("templates/DarkSouls.template")
     }
 
     /*

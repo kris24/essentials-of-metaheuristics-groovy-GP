@@ -32,9 +32,12 @@ public class DarkSoul_${id} extends AdvancedRobot {
 		scanDir = 1;
     	enemyHashMap = new LinkedHashMap<String, Double>(5, 2, true);
 		
-		setColors(Color.black,Color.black,Color.black);
+		setColors(Color.black,Color.black,Color.black, Color.red, Color.red);
 		setAdjustGunForRobotTurn(true);
 		setAdjustRadarForGunTurn(true);
+		
+		//VARIABLES USED BY EVOLUTION
+		double moveDirection = 1;
 			
     	while(true) {
         	setTurnRadarRightRadians(scanDir * Double.POSITIVE_INFINITY);

@@ -11,6 +11,7 @@ import spock.lang.Specification
 class TestRoboCodeBattle extends Specification {
 	/*
 	 * id : an id used in the generation of the name of the class.
+	 * code : evolved legal Java Code
 	 * enemy_energy : the coefficient for the enemy's energy
 	 * my_energy : the coefficient for our energy
 	 * angle_diff : the coefficient for the different in angles between us and the point and then and the point
@@ -24,18 +25,20 @@ class TestRoboCodeBattle extends Specification {
 //	def distance
 	def robotBuilder
 	def battleRunner
+	def movementFactory
 
 	def setup() {
 		Random random = new Random()
 		id = random.nextInt(1000)
-		code = "ahead(10);"
+		movementFactory = new MovementFactory()
+		code = movementFactory.returnRobot();
 //		enemy_energy = random.nextFloat() * 100
 //		my_energy = random.nextFloat() * 100
 //		angle_diff = random.nextFloat() * 100
 //		distance = random.nextFloat() * 100
         def values = ["id" : id, "code" : code ] // , "enemy_energy" : enemy_energy, "my_energy" : my_energy, "angle_diff" : angle_diff, "distance" : distance]
 
-		robotBuilder = new RobotBuilder("templates/IterativeLinearTargeting.template")
+		robotBuilder = new RobotBuilder("templates/DarkSouls.template")
 		robotBuilder.buildJarFile(values)
 		
 		battleRunner = new BattleRunner("templates/battle.template")
@@ -58,6 +61,7 @@ class TestRoboCodeBattle extends Specification {
 
         then:
 		score >= 0
+		//System.out.println("Score:  " + score);
 	}
 	
 	def confirmBattleFile() {
