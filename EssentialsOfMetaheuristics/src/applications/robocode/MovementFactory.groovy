@@ -7,7 +7,7 @@ class MovementFactory {
 	Random rand = new Random()
 	def code = ""
 	
-	def orders = [" setAhead( /arg );", " setTurnRight( /arg );"]
+	def orders = [" setAhead( 100 );", " setTurnRight( 100 );"]
 	def args = [" getY()", " getX()"]
 	def cons = [" 1000"]
 	def comparators = []
