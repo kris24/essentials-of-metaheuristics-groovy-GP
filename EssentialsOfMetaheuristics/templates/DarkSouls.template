@@ -18,6 +18,9 @@ import java.awt.geom.Point2D;
  */
  
 public class DarkSoul_${id} extends AdvancedRobot {
+
+	//VARIABLES USED BY EVOLUTION
+	double moveDirection = 1;
 	
 	// Oldest Scanned Radar
 	static LinkedHashMap<String, Double> enemyHashMap;
@@ -36,8 +39,7 @@ public class DarkSoul_${id} extends AdvancedRobot {
 		setAdjustGunForRobotTurn(true);
 		setAdjustRadarForGunTurn(true);
 		
-		//VARIABLES USED BY EVOLUTION
-		double moveDirection = 1;
+
 			
     	while(true) {
         	setTurnRadarRightRadians(scanDir * Double.POSITIVE_INFINITY);
@@ -45,6 +47,21 @@ public class DarkSoul_${id} extends AdvancedRobot {
        		
        		${code}
     	}
+	}
+	
+//- hitting walls ------------------------------------------------------------------------------------------------------
+	public void onHitWall(HitWallEvent e) {
+		${code}
+	}
+	
+//- hitting other robots ---------------------------------------------------------------------------------------------
+	public void onHitRobot(HitRobotEvent e) {
+		${code}
+	}
+
+//- being hit by bullet ----------------------------------------------------------------------------------------------
+	public void onHitByBullet(HitByBulletEvent e) {
+		${code}
 	}
 	
 //- on enemy death ---------------------------------------------------------------------------------------------

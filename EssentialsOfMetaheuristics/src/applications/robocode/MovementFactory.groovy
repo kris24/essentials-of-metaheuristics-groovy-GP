@@ -1,30 +1,76 @@
 package applications.robocode
 
 import java.util.Random
+import java.util.regex.Pattern
 
 class MovementFactory {
 	
 	Random rand = new Random()
 	def code = ""
+	def Pattern arg = Pattern.compile("/arg")
+	def Pattern ord = Pattern.compile("/ord")
+	def Pattern com = Pattern.compile("/com")
 	
-	def orders = [" setAhead( 100 );", " setTurnRight( 100 );"]
-	def args = [" getY()", " getX()"]
-	def cons = [" 1000"]
-	def comparators = []
+	def orders = 
+	[" setAhead(/arg); \n",
+	" setBack(/arg); \n", 
+	" setTurnRight(/arg); \n", 
+	" setTurnLeft(/arg); \n",
+	" if (/arg/com/arg) \n {/ord} \n",
+	" moveDirection =/arg ; \n",
+	" ahead(/arg); \n",
+	" back(/arg); \n",
+	" stop(); \n"]
+	
+	def args = 
+	[" getY()", 
+	" getX()",
+	" getVelocity()",
+	" getEnergy()",
+	" getHeading()",
+	" getGunHeading()",
+	" moveDirection"]
+	def cons = [" 1000"," 360", " 0.5"]
+	def comparators = [" ==", " <", " >" ]
 	def functionSet = args + cons
 	
-	def limit = 4
+	def limit = 6
 	
 	def returnRobot() {
 
-		createOrders()
+		create()
+		fillOrders()
+		fillArgs()
+		fillCom()
 		
 		return code
 	}
 	
-	def createOrders() {
+	def create() {
 		for ( i in 0..rand.nextInt(limit)) {
 			code = code + orders[rand.nextInt(orders.size)]
 		}
 	}
+	
+	def fillOrders() {
+		if (code.find(ord)) {
+			code = code.replaceFirst(ord, orders[rand.nextInt(orders.size)])
+			fillOrders()
+		}
+	}
+	
+	def fillArgs() {
+		if (code.find(arg)) {
+			code = code.replaceFirst(arg, functionSet[rand.nextInt(functionSet.size)])
+			fillArgs()
+		}
+	}
+	
+	def fillCom() {
+		if (code.find(com)) {
+			code = code.replaceFirst(com, comparators[rand.nextInt(comparators.size)])
+			fillCom()
+		}
+	}
+	
 }
