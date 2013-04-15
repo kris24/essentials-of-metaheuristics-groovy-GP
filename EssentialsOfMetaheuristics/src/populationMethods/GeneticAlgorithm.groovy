@@ -10,7 +10,7 @@ class GeneticAlgorithm {
 	def popsize = 100
 	
 	// Our Algorithm takes a Genetic Algorithm Problem, a desired population size
-	def minimize(problem, populationSize=popsize, selector=new TournamentSelection()) {
+	def maximize(problem, populationSize=popsize, selector=new TournamentSelection()) {
 		popsize = populationSize
 	
 		def startingPopulation = [] as Set
@@ -25,7 +25,7 @@ class GeneticAlgorithm {
 		while(!problem.terminate(best, qualityOfBest)) {
 			for(def individual: startingPopulation) {
 				def newQuality = problem.quality(individual)
-				if(newQuality < qualityOfBest) {
+				if(newQuality > qualityOfBest) {
 					best = individual
 					qualityOfBest = newQuality
 				}

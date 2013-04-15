@@ -10,7 +10,7 @@ class MovementFactory {
 	def Pattern arg = Pattern.compile("/arg")
 	def Pattern ord = Pattern.compile("/ord")
 	def Pattern com = Pattern.compile("/com")
-	//no spaces except after semicolon
+	//no spaces except before order and after semicolon
 	def orders = 
 	[" setAhead(/arg); ",
 	" setBack(/arg); ", 
