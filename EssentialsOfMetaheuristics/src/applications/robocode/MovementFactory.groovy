@@ -10,30 +10,30 @@ class MovementFactory {
 	def Pattern arg = Pattern.compile("/arg")
 	def Pattern ord = Pattern.compile("/ord")
 	def Pattern com = Pattern.compile("/com")
-	
+	//no spaces except after semicolon
 	def orders = 
-	[" setAhead(/arg); \n",
-	" setBack(/arg); \n", 
-	" setTurnRight(/arg); \n", 
-	" setTurnLeft(/arg); \n",
-	" if (/arg/com/arg) {\n/ord} \n",
-	" move =/arg ; \n",
-	" ahead(/arg); \n",
-	" back(/arg); \n",
-	" stop(); \n",
-	" turnRight(/arg); \n", 
-	" turnLeft(/arg); \n"]
+	[" setAhead(/arg); ",
+	" setBack(/arg); ", 
+	" setTurnRight(/arg); ", 
+	" setTurnLeft(/arg); ",
+	" if(/arg/com/arg){/ord} ",
+	" move=/arg ; ",
+	" ahead(/arg); ",
+	" back(/arg); ",
+	" stop(); ",
+	" turnRight(/arg); ", 
+	" turnLeft(/arg); "]
 	
 	def args = 
-	[" getY()", 
-	" getX()",
-	" getVelocity()",
-	" getEnergy()",
-	" getHeading()",
-	" getGunHeading()",
-	" move"]
-	def cons = [" 1000"," 360", " 90", " 180", " -1"]
-	def comparators = [" ==", " <", " >" ]
+	["getY()", 
+	"getX()",
+	"getVelocity()",
+	"getEnergy()",
+	"getHeading()",
+	"getGunHeading()",
+	"move"]
+	def cons = ["1000","360", "90", "180", "-1"]
+	def comparators = ["==", "<", ">" ]
 	def functionSet = args + cons
 	
 	def limit = 6
