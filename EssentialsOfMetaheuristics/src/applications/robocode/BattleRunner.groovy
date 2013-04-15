@@ -31,7 +31,7 @@ class BattleRunner {
     def runBattle(id) {
         linkJarFile(id)
         File battleFile = new File("${robotDirectory}/evolve.battle")
-        def command = "${userHome}/robocode/robocode.sh -battle ${battleFile.absolutePath}"
+        def command = "${userHome}/robocode/robocode.sh -battle ${battleFile.absolutePath} -nodisplay"
 		// -nodisplay
         def proc = command.execute(null, new File(robotDirectory))
         proc.waitFor()

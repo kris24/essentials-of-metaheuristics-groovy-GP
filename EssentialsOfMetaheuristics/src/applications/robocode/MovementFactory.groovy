@@ -16,11 +16,13 @@ class MovementFactory {
 	" setBack(/arg); \n", 
 	" setTurnRight(/arg); \n", 
 	" setTurnLeft(/arg); \n",
-	" if (/arg/com/arg) \n {/ord} \n",
-	" moveDirection =/arg ; \n",
+	" if (/arg/com/arg) {\n/ord} \n",
+	" move =/arg ; \n",
 	" ahead(/arg); \n",
 	" back(/arg); \n",
-	" stop(); \n"]
+	" stop(); \n",
+	" turnRight(/arg); \n", 
+	" turnLeft(/arg); \n"]
 	
 	def args = 
 	[" getY()", 
@@ -29,8 +31,8 @@ class MovementFactory {
 	" getEnergy()",
 	" getHeading()",
 	" getGunHeading()",
-	" moveDirection"]
-	def cons = [" 1000"," 360", " 0.5"]
+	" move"]
+	def cons = [" 1000"," 360", " 90", " 180", " -1"]
 	def comparators = [" ==", " <", " >" ]
 	def functionSet = args + cons
 	

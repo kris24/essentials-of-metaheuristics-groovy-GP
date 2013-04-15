@@ -11,32 +11,41 @@ import spock.lang.Specification
 class TestRoboCodeBattle extends Specification {
 	/*
 	 * id : an id used in the generation of the name of the class.
-	 * code : evolved legal Java Code
-	 * enemy_energy : the coefficient for the enemy's energy
-	 * my_energy : the coefficient for our energy
-	 * angle_diff : the coefficient for the different in angles between us and the point and then and the point
-	 * distance : the coefficient for the distance between the point and the enemy
+	 * code* : evolved legal Java Code for each situation
 	 */
 	def id
-	def code
-//	def enemy_energy
-//	def my_energy
-//	def angle_diff
-//	def distance
+	def codeRun
+	def codeWall
+	def codeCollision
+	def codeReceiveHit
+	def codeHit
+	def codeMiss
+
 	def robotBuilder
 	def battleRunner
 	def movementFactory
+	def code = []
 
 	def setup() {
 		Random random = new Random()
 		id = random.nextInt(1000)
+		for ( i in 0..6 ) {
 		movementFactory = new MovementFactory()
-		code = movementFactory.returnRobot();
-//		enemy_energy = random.nextFloat() * 100
-//		my_energy = random.nextFloat() * 100
-//		angle_diff = random.nextFloat() * 100
-//		distance = random.nextFloat() * 100
-        def values = ["id" : id, "code" : code ] // , "enemy_energy" : enemy_energy, "my_energy" : my_energy, "angle_diff" : angle_diff, "distance" : distance]
+		code[i] = movementFactory.returnRobot()
+		}
+		codeRun = code[0]
+		codeWall = code[1];
+		codeCollision = code[2];
+		codeReceiveHit = code[3];
+		codeHit = code[4];
+		codeMiss = code[5];
+        
+		def values = ["id" : id, "codeRun" : codeRun, 
+			"codeWall" : codeWall, 
+			"codeCollision" : codeCollision,
+			"codeReceiveHit" : codeReceiveHit,
+			"codeHit" : codeHit,
+			"codeMiss" : codeMiss ] 
 
 		robotBuilder = new RobotBuilder("templates/DarkSouls.template")
 		robotBuilder.buildJarFile(values)

@@ -9,6 +9,7 @@ import java.awt.geom.Point2D;
 
 //  Based on work by Nic McPhee
 //  Implements Iterative Linear Targeting from RoboWiki http://robowiki.net/wiki/Linear_Targeting
+//  (with adaptive firepower)
 //  Implements Oldest Scanned Radar from RoboWiki http://robowiki.net/wiki/Melee_Radar
 
 /*
@@ -18,9 +19,13 @@ import java.awt.geom.Point2D;
  */
  
 public class DarkSoul_${id} extends AdvancedRobot {
+	public static final double MAX_BULLET_POWER = 3.0;
 
 	//VARIABLES USED BY EVOLUTION
-	double moveDirection = 1;
+	double move = 1;
+	
+	//Modified firepower
+	double bulletPower = MAX_BULLET_POWER;
 	
 	// Oldest Scanned Radar
 	static LinkedHashMap<String, Double> enemyHashMap;
@@ -45,25 +50,39 @@ public class DarkSoul_${id} extends AdvancedRobot {
         	setTurnRadarRightRadians(scanDir * Double.POSITIVE_INFINITY);
        		scan();
        		
-       		${code}
+       		${codeRun}
     	}
 	}
 	
 //- hitting walls ------------------------------------------------------------------------------------------------------
 	public void onHitWall(HitWallEvent e) {
-		${code}
+		${codeWall}
 	}
 	
 //- hitting other robots ---------------------------------------------------------------------------------------------
 	public void onHitRobot(HitRobotEvent e) {
-		${code}
+		${codeCollision}
 	}
 
 //- being hit by bullet ----------------------------------------------------------------------------------------------
 	public void onHitByBullet(HitByBulletEvent e) {
-		${code}
+		${codeReceiveHit}
 	}
 	
+//- hit enemy ----------------------------------------------------------------------------------------------
+	public void onBulletHit(BulletHitEvent e) {
+		if (bulletPower < MAX_BULLET_POWER) {
+			bulletPower++;
+		}
+		${codeHit}
+	} 
+//- miss enemy ---------------------------------------------------------------------------------------------------
+	public void onBulletMissed(BulletMissedEvent e) {
+		if (bulletPower > 1) {
+			bulletPower--;
+		}
+		${codeMiss}
+	}
 //- on enemy death ---------------------------------------------------------------------------------------------
 	public void onRobotDeath(RobotDeathEvent e) {
     enemyHashMap.remove(e.getName());
@@ -83,7 +102,7 @@ public class DarkSoul_${id} extends AdvancedRobot {
 	        sought = ehm.keySet().iterator().next();
 	    }
 
-		double bulletPower = Math.min(3.0,getEnergy());
+		//double bulletPower = Math.min(3.0,getEnergy());
 		double myX = getX();
 		double myY = getY();
 		double absoluteBearing = getHeadingRadians() + e.getBearingRadians();
