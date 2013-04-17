@@ -1,4 +1,4 @@
-package applications.robocode
+package operators
 
 class RoboCrossover {
 	

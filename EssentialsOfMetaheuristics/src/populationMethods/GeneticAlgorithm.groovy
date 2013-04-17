@@ -1,6 +1,6 @@
 package populationMethods
 import java.util.Random
-import operators.Crossovers
+import operators.RoboCrossover
 import operators.TournamentSelection
 
 class GeneticAlgorithm {
@@ -38,6 +38,7 @@ class GeneticAlgorithm {
 				def parentA = selector.select(problem, startingPopulation as List)
 				def parentB = selector.select(problem, startingPopulation as List)
 				def children = Node.crossover(parentA, parentB)
+				children.add(Node.crossover(parentB, parentA))
 				endingPopulation.add(problem.tweak(children[0]))
 				endingPopulation.add(problem.tweak(children[1]))
 			}

@@ -1,6 +1,7 @@
 package applications.robocode
 
 
+import operators.RoboCrossover;
 import spock.lang.Specification
 class TestRoboCrossover extends Specification {
     
