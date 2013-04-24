@@ -53,14 +53,7 @@ class TestRoboCodeBattle extends Specification {
 		battleRunner = new BattleRunner("templates/battle.template")
 	}
 	
-	def "Check that the battle file is correctly constructed"() {
-		when:
-		battleRunner.buildBattleFile(id)
-		
-		then:
-		confirmBattleFile()
-	}
-	
+
 	def "Check that we can run a battle and extract the scores"() {
 		given:
 		battleRunner.buildBattleFile(id)

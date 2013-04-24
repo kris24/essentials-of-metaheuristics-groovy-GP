@@ -55,6 +55,8 @@ class Robocode {
 		
 		def score = battleRunner.runBattle(id)
 		
+		System.out.println(score)
+		
 	}
 	
 	def tweak() {

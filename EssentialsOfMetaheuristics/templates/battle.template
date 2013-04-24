@@ -5,5 +5,7 @@ robocode.battle.numRounds=10
 robocode.battle.gunCoolingRate=0.1
 robocode.battle.rules.inactivityTime=450
 robocode.battle.hideEnemyNames=true
-robocode.battle.selectedRobots=sample.Walls,sample.Tracker, rz.HawkOnFireOS*, evolved.DarkSoul_${id}
+robocode.battle.selectedRobots=sample.Walls,sample.Tracker, evolved.DarkSoul_${id}
+
+//rz.HawkOnFireOS*
 
