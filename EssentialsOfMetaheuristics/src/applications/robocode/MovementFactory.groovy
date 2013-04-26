@@ -51,7 +51,7 @@ class MovementFactory {
 	
 	def create() {
 		//for ( i in 0..rand.nextInt(limit)) {
-		for ( i in 0..limit) {
+		for ( i in 0..limit-1) {
 			code = code + orders[rand.nextInt(orders.size)]
 		}
 	}

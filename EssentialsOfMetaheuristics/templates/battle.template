@@ -1,5 +1,5 @@
 #Battle Properties
-robocode.battleField.width=800
+robocode.battleField.width=600
 robocode.battleField.height=600
 robocode.battle.numRounds=10
 robocode.battle.gunCoolingRate=0.1

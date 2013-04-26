@@ -5,7 +5,7 @@ class RoboCrossover {
 	def Random random = new Random()
 	
 	def crossover(i1, i2) {
-		//System.out.println("Begin " + i1.evolvedProperties)
+		System.out.println("Begin Crossover " + i1.evolvedProperties)
 		for ( i in 0..6) {
 			def result = []
 			
@@ -19,7 +19,7 @@ class RoboCrossover {
 			i1.evolvedProperties[i] = backToString(result[0])
 			//System.out.println("Final  \n" + i1.evolvedProperties[i])
 		}	
-		//System.out.println("End " + i1.evolvedProperties)
+		System.out.println("End Crossover " + i1.evolvedProperties)
 			return i1
 		
 	}
@@ -30,10 +30,9 @@ class RoboCrossover {
 		return codeArray
 	}
 	//borrowed from Crossovers operator
-	//currently 
-	def onePointCrossover = { father, mother, crossoverPoint = random.nextInt(father.size()) ->
+	def onePointCrossover = { father, mother, crossoverPoint1 = random.nextInt(father.size()), crossoverPoint2 = random.nextInt(mother.size()) ->
 		[
-			father[0..<crossoverPoint] + mother[crossoverPoint..<mother.size()]
+			father[0..<crossoverPoint1] + mother[crossoverPoint2..<mother.size()]
 		]
 	}
 	

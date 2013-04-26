@@ -1,10 +1,10 @@
 package applications.robocode
 
 class Individual {
-
+	
 	def evolvedProperties = []
 	def values
-	def score
+	def quality
 	def movementFactory
 	
 	//Template Values
@@ -17,6 +17,7 @@ class Individual {
 	def codeMiss
 	
 	def Individual(identity){
+
 		id = identity
 		
 		for ( i in 0..6 ) {

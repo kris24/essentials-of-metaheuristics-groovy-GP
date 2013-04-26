@@ -5,6 +5,7 @@ import applications.robocode.*
 class RobocodeProblem {
 	Integer evalCount = 0
 	Integer maxIterations = 1000
+	Integer IDcount = 0
 	
 	//Template Values
 	def id
@@ -23,8 +24,7 @@ class RobocodeProblem {
 	def individual
 	
 	def create = {
-		Random random = new Random()
-		id = random.nextInt(1000)
+		id = IDcount++
 		
 		individual = new Individual(id)
 		
@@ -35,24 +35,24 @@ class RobocodeProblem {
 	def random = create
 	
 	def quality(i) {
-		def score
-		if (i.score == null){
+		def score = i.quality
+		if (i.quality == null){
 		
-		System.out.println("Building a robot")
+		System.out.println("Building robot DarkSoul_" +  i.id)
 		robotBuilder = new RobotBuilder("templates/DarkSouls.template")
-		robotBuilder.buildJarFile(individual.values)
+		robotBuilder.buildJarFile(i.values)
 		System.out.println("Building with values   " + i.values)
 		
 		battleRunner = new BattleRunner("templates/battle.template")
 		
-		battleRunner.buildBattleFile(id)
+		battleRunner.buildBattleFile(i.id)
 		
-		score = battleRunner.runBattle(id)
-		i.score = score
+		score = battleRunner.runBattle(i.id)
+		i.quality = score
 		}
 		
-		System.out.println("Score   " + score)
-		return score
+		System.out.println("Score for DarkSoul_" + i.id + ": " + score)
+		return i
 		
 	}
 	
