@@ -4,17 +4,24 @@ class RoboCrossover {
 	
 	def Random random = new Random()
 	
-	def crossover(str1, str2) {
-		def result = []
+	def crossover(i1, i2) {
+		//System.out.println("Begin " + i1.evolvedProperties)
+		for ( i in 0..6) {
+			def result = []
+			
+			def arr1 = makeArray(i1.evolvedProperties[i])
+			def arr2 = makeArray(i2.evolvedProperties[i])	
+			//System.out.println("MakeArray  \n" + i1.evolvedProperties[i])
+			
+			result = onePointCrossover(arr1,arr2)
+			//System.out.println("Result  \n" + result)
+			
+			i1.evolvedProperties[i] = backToString(result[0])
+			//System.out.println("Final  \n" + i1.evolvedProperties[i])
+		}	
+		//System.out.println("End " + i1.evolvedProperties)
+			return i1
 		
-		def arr1 = makeArray(str1)
-		def arr2 = makeArray(str2)	
-		
-		result = onePointCrossover(arr1,arr2)
-		
-		str1 = backToString(result[0])
-		
-		return str1
 	}
 	
 	def makeArray(str) {
@@ -23,6 +30,7 @@ class RoboCrossover {
 		return codeArray
 	}
 	//borrowed from Crossovers operator
+	//currently 
 	def onePointCrossover = { father, mother, crossoverPoint = random.nextInt(father.size()) ->
 		[
 			father[0..<crossoverPoint] + mother[crossoverPoint..<mother.size()]

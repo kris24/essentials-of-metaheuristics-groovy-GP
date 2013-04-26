@@ -10,7 +10,7 @@ class GeneticAlgorithm {
 	def popsize = 100
 	
 	// Our Algorithm takes a Genetic Algorithm Problem, a desired population size
-	def maximize(problem, populationSize=popsize, selector=new TournamentSelection()) {
+	def maximize(problem, populationSize=popsize, selector=new TournamentSelection(), crosser=new RoboCrossover()) {
 		popsize = populationSize
 	
 		def startingPopulation = [] as Set
@@ -18,6 +18,7 @@ class GeneticAlgorithm {
 		popsize.times {
 			def toAdd = problem.random()
 			startingPopulation.add(toAdd) // Add a new random individual
+			//System.out.println(toAdd.evolvedProperties)
 		}
 		
 		def best = problem.create()
@@ -37,10 +38,14 @@ class GeneticAlgorithm {
 			for(i in 0..(popsize/2)) {
 				def parentA = selector.select(problem, startingPopulation as List)
 				def parentB = selector.select(problem, startingPopulation as List)
-				def children = Node.crossover(parentA, parentB)
-				children.add(Node.crossover(parentB, parentA))
-				endingPopulation.add(problem.tweak(children[0]))
-				endingPopulation.add(problem.tweak(children[1]))
+				//System.out.println(" ParentA    "  + parentA.evolvedProperties)
+				//System.out.println(" ParentB    "  + parentB.evolvedProperties)
+				def children = []
+				children[0] = crosser.crossover(parentA, parentB)
+				children[1] = crosser.crossover(parentB, parentA)
+				endingPopulation.add(children[0])
+				endingPopulation.add(children[1])
+				//System.out.println("Robot  " + i + "\n" + children[0].evolvedProperties)
 			}
 			startingPopulation = endingPopulation
 		}

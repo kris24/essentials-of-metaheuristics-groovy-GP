@@ -2,7 +2,10 @@ package problems
 
 import applications.robocode.*
 
-class Robocode {
+class RobocodeProblem {
+	Integer evalCount = 0
+	Integer maxIterations = 1000
+	
 	//Template Values
 	def id
 	def codeRun
@@ -16,14 +19,15 @@ class Robocode {
 	def robotBuilder
 	def movementFactory
 	def battleRunner
-	def evolvedProperties = []
+	def code = []
+	def individual
 	
-	def create() {
+	def create = {
 		id = "12"
 		
 		for ( i in 0..6 ) {
 		movementFactory = new MovementFactory()
-		evolvedProperties[i] = movementFactory.returnRobot()
+		code[i] = movementFactory.returnRobot()
 		}
 		codeRun = code[0]
 		codeWall = code[1];
@@ -39,27 +43,29 @@ class Robocode {
 			"codeHit" : codeHit,
 			"codeMiss" : codeMiss ]
 		
+		individual = new Individual(code, id)
+		
 	}
 	
 	def copy = { a -> a.clone() }
 	
 	def random = create
 	
-	def quality() {
-		robotBuilder = new RobotBuilder("templates/DarkSouls.template")
-		robotBuilder.buildJarFile(values)
-		
-		battleRunner = new BattleRunner("templates/battle.template")
-		
-		battleRunner.buildBattleFile(id)
-		
-		def score = battleRunner.runBattle(id)
-		
-		System.out.println(score)
+	def quality = {
+//		robotBuilder = new RobotBuilder("templates/DarkSouls.template")
+//		robotBuilder.buildJarFile(values)
+//		
+//		battleRunner = new BattleRunner("templates/battle.template")
+//		
+//		battleRunner.buildBattleFile(id)
+//		
+//		def score = battleRunner.runBattle(id)
+//		
+//		System.out.println(score)
 		
 	}
 	
-	def tweak() {
+	def tweak = {
 		
 	}
 	
@@ -67,11 +73,12 @@ class Robocode {
 
 	}
 
-	def terminate() {
-
-	}
+    def terminate = { a, q = quality(a) ->
+        evalCount >= maxIterations
+    }
 
 	String toString() {
 
 	}
 }
+

@@ -1,7 +1,8 @@
 package applications.robocode
 
 
-import operators.RoboCrossover;
+import operators.RoboCrossover
+import problems.RobocodeProblem
 import spock.lang.Specification
 class TestRoboCrossover extends Specification {
     
@@ -9,6 +10,7 @@ class TestRoboCrossover extends Specification {
 	def roboCrossover2
 	
 	def resultstr
+
 	
 
 	
@@ -19,12 +21,15 @@ class TestRoboCrossover extends Specification {
 
 	def "test crossover operator"() {
 		when:
-		def string1 = "setAhead(90);  turnRight(360);  setBack(180);  "
-		def string2 = "if(getEnergy()<getX()){ turnLeft(360); }  turnLeft(getVelocity());  ahead(90);  stop(); "
-		resultstr = roboCrossover.crossover(string1,string2)
+		def robo1 = new RobocodeProblem()
+		robo1.create()
+		def robo2 = new RobocodeProblem()
+		robo2.create()
+		System.out.println("TESTSTART:  \n" + robo1.individual.evolvedProperties)
+		resultstr = roboCrossover.crossover(robo1.individual,robo2.individual)
 		
 		then:
-		System.out.println("TEST: \n" + resultstr)
+		System.out.println("TEST: \n" + resultstr.evolvedProperties)
 	}
     
 	def "Confirm that string split works"() {
@@ -50,7 +55,7 @@ class TestRoboCrossover extends Specification {
 		resultstr = roboCrossover.backToString(resultarr[0])
 		
 		then:
-		System.out.println("\n" + resultstr)
+		System.out.println("\n") //+ resultstr)
 	}
 }
 
