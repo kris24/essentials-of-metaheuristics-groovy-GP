@@ -23,27 +23,10 @@ class RobocodeProblem {
 	def individual
 	
 	def create = {
-		id = "12"
+		Random random = new Random()
+		id = random.nextInt(1000)
 		
-		for ( i in 0..6 ) {
-		movementFactory = new MovementFactory()
-		code[i] = movementFactory.returnRobot()
-		}
-		codeRun = code[0]
-		codeWall = code[1];
-		codeCollision = code[2];
-		codeReceiveHit = code[3];
-		codeHit = code[4];
-		codeMiss = code[5];
-		
-		def values = ["id" : id, "codeRun" : codeRun,
-			"codeWall" : codeWall,
-			"codeCollision" : codeCollision,
-			"codeReceiveHit" : codeReceiveHit,
-			"codeHit" : codeHit,
-			"codeMiss" : codeMiss ]
-		
-		individual = new Individual(code, id)
+		individual = new Individual(id)
 		
 	}
 	
@@ -51,17 +34,25 @@ class RobocodeProblem {
 	
 	def random = create
 	
-	def quality = {
-//		robotBuilder = new RobotBuilder("templates/DarkSouls.template")
-//		robotBuilder.buildJarFile(values)
-//		
-//		battleRunner = new BattleRunner("templates/battle.template")
-//		
-//		battleRunner.buildBattleFile(id)
-//		
-//		def score = battleRunner.runBattle(id)
-//		
-//		System.out.println(score)
+	def quality(i) {
+		def score
+		if (i.score == null){
+		
+		System.out.println("Building a robot")
+		robotBuilder = new RobotBuilder("templates/DarkSouls.template")
+		robotBuilder.buildJarFile(individual.values)
+		System.out.println("Building with values   " + i.values)
+		
+		battleRunner = new BattleRunner("templates/battle.template")
+		
+		battleRunner.buildBattleFile(id)
+		
+		score = battleRunner.runBattle(id)
+		i.score = score
+		}
+		
+		System.out.println("Score   " + score)
+		return score
 		
 	}
 	

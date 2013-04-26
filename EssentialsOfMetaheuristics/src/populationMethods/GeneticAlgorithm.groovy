@@ -24,7 +24,7 @@ class GeneticAlgorithm {
 		def best = problem.create()
 		def qualityOfBest = problem.quality(best)
 		while(!problem.terminate(best, qualityOfBest)) {
-			for(def individual: startingPopulation) {
+			for(individual in startingPopulation) {
 				def newQuality = problem.quality(individual)
 				if(newQuality > qualityOfBest) {
 					best = individual
@@ -38,14 +38,15 @@ class GeneticAlgorithm {
 			for(i in 0..(popsize/2)) {
 				def parentA = selector.select(problem, startingPopulation as List)
 				def parentB = selector.select(problem, startingPopulation as List)
-				//System.out.println(" ParentA    "  + parentA.evolvedProperties)
-				//System.out.println(" ParentB    "  + parentB.evolvedProperties)
+				System.out.println(" ParentA    "  + parentA.evolvedProperties)
+				System.out.println(" ParentB    "  + parentB.evolvedProperties)
 				def children = []
 				children[0] = crosser.crossover(parentA, parentB)
 				children[1] = crosser.crossover(parentB, parentA)
 				endingPopulation.add(children[0])
 				endingPopulation.add(children[1])
-				//System.out.println("Robot  " + i + "\n" + children[0].evolvedProperties)
+				System.out.println("Robot  " + i + "\n" + children[0].evolvedProperties)
+				System.out.println("Robot  " + i + "\n" + children[1].evolvedProperties)
 			}
 			startingPopulation = endingPopulation
 		}
