@@ -26,6 +26,7 @@ class GeneticAlgorithm {
 		while(!problem.terminate(best)) {
 			for(individual in startingPopulation) {
 				def newQuality = problem.quality(individual)
+				System.out.println("Individual DarkSoul_" + individual.id + " score = " + individual.quality)
 				if(newQuality > qualityOfBest) {
 					best = individual
 					qualityOfBest = newQuality
@@ -41,10 +42,10 @@ class GeneticAlgorithm {
 				System.out.println(" ParentA    "  + parentA.id)
 				System.out.println(" ParentB    "  + parentB.id)
 				def children = []
-				children[0] = crosser.crossover(parentA, parentB)
-				children[1] = crosser.crossover(parentB, parentA)
-				System.out.println("New robot = DarkSoul_" + children[0].id + " " + children[0].quality)
-				System.out.println("New robot = DarkSoul_" + children[1].id + " " + children[1].quality)
+				children[0] = crosser.crossover(problem, parentA, parentB)
+				children[1] = crosser.crossover(problem, parentB, parentA)
+				System.out.println("New robot = DarkSoul_" + children[0].id)
+				System.out.println("New robot = DarkSoul_" + children[1].id)
 				endingPopulation.add(children[0])
 				endingPopulation.add(children[1])
 				

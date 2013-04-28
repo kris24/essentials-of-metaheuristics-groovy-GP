@@ -31,7 +31,16 @@ class RobocodeProblem {
 		
 	}
 	
-	def copy = { a -> a.clone() }
+	def copy(a) {
+		def copy = a.clone() 
+		id = IDcount++
+		copy.id = id
+		copy.evolvedProperties = null
+		copy.quality = null
+		System.out.println("Made a copy of DarkSoul_" + a.id + " called " + "DarkSoul_" + copy.id)
+
+		return copy
+	}
 	
 	def random = create
 	

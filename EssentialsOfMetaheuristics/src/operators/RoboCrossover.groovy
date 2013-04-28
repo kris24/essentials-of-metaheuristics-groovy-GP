@@ -4,8 +4,9 @@ class RoboCrossover {
 	
 	def Random random = new Random()
 	
-	def crossover(i1, i2) {
-		System.out.println("Begin Crossover " + i1.evolvedProperties)
+	def crossover(problem, i1, i2) {
+		//System.out.println("Begin Crossover " + i1.evolvedProperties)
+		def crossed = []
 		for ( i in 0..6) {
 			def result = []
 			
@@ -16,11 +17,20 @@ class RoboCrossover {
 			result = onePointCrossover(arr1,arr2)
 			//System.out.println("Result  \n" + result)
 			
-			i1.evolvedProperties[i] = backToString(result[0])
-			//System.out.println("Final for " + i + " " + i1.evolvedProperties[i])
-		}	
-		System.out.println("End Crossover " + i1.evolvedProperties)
-			return i1
+			crossed.add(backToString(result))
+			//System.out.println("Final for " + i + " " + crossed)
+		}
+		//crossed = backToString(result)
+		def child = problem.copy(i1)
+		System.out.println("Crossed " + crossed)
+		child.evolvedProperties = crossed
+		child.assignCode()
+		child.assignVals()
+		System.out.println("Original " + i1.values)
+		System.out.println("New " + child.values)
+		child.quality = problem.quality(child)
+		System.out.println("Quality " + i1.quality + " " + child.quality)
+			return child
 		
 	}
 	

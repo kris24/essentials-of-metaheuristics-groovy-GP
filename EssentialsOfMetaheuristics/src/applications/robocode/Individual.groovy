@@ -1,6 +1,6 @@
 package applications.robocode
 
-class Individual {
+class Individual implements Cloneable {
 	
 	def evolvedProperties = []
 	def values
@@ -16,7 +16,7 @@ class Individual {
 	def codeHit
 	def codeMiss
 	
-	def Individual(identity){
+	def Individual(identity) {
 
 		id = identity
 		
@@ -24,19 +24,31 @@ class Individual {
 			movementFactory = new MovementFactory()
 			evolvedProperties[i] = movementFactory.returnRobot()
 			}
-			codeRun = evolvedProperties[0]
-			codeWall = evolvedProperties[1];
-			codeCollision = evolvedProperties[2];
-			codeReceiveHit = evolvedProperties[3];
-			codeHit = evolvedProperties[4];
-			codeMiss = evolvedProperties[5];
+
+			assignCode()
+			assignVals()
+	}
 		
-		values = ["id" : id, "codeRun" : codeRun,
+	def assignCode() {
+		codeRun = evolvedProperties[0]
+		codeWall = evolvedProperties[1]
+		codeCollision = evolvedProperties[2]
+		codeReceiveHit = evolvedProperties[3]
+		codeHit = evolvedProperties[4]
+		codeMiss = evolvedProperties[5]
+	}
+	
+	
+	
+	def assignVals() {
+			values = ["id" : id, "codeRun" : codeRun,
 			"codeWall" : codeWall,
 			"codeCollision" : codeCollision,
 			"codeReceiveHit" : codeReceiveHit,
 			"codeHit" : codeHit,
 			"codeMiss" : codeMiss ]
 	}
+		
+	
 	
 }
