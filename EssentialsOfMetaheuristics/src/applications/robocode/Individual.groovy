@@ -28,6 +28,13 @@ class Individual implements Cloneable {
 			assignCode()
 			assignVals()
 	}
+	def toStr() {
+		def code = ""
+		for (item in this.evolvedProperties) {
+			code + item
+		}
+	}
+	
 		
 	def assignCode() {
 		codeRun = evolvedProperties[0]

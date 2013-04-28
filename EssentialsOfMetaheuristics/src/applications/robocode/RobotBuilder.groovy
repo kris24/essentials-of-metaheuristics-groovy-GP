@@ -64,7 +64,7 @@ class RobotBuilder {
     }
 
     private File createFile(javaFileName) {
-		System.out.println("Java File " + javaFileName)
+		//System.out.println("Java File " + javaFileName)
         new File(robotDirectory).mkdir()
 		new File("${robotDirectory}/${robotPackage}").mkdir()
         File javaFile = new File("${robotDirectory}/${robotPackage}/${javaFileName}")

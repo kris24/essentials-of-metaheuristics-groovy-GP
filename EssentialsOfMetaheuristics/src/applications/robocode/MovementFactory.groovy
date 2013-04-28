@@ -45,7 +45,9 @@ class MovementFactory {
 		fillArgs()
 		fillCom()
 		
-		return code
+		def evolvedProperty = []
+		evolvedProperty = makeArray(code)
+		return evolvedProperty
 	}
 	
 	def create() {
@@ -74,5 +76,12 @@ class MovementFactory {
 			fillCom()
 		}
 	}
+	
+	def makeArray(str) {
+		def strToArr = []
+		strToArr = str.split("  ")
+		return strToArr
+
+}
 	
 }
