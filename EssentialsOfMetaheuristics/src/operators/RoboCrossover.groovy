@@ -17,7 +17,7 @@ class RoboCrossover {
 			//System.out.println("Result  \n" + result)
 			
 			i1.evolvedProperties[i] = backToString(result[0])
-			//System.out.println("Final  \n" + i1.evolvedProperties[i])
+			//System.out.println("Final for " + i + " " + i1.evolvedProperties[i])
 		}	
 		System.out.println("End Crossover " + i1.evolvedProperties)
 			return i1

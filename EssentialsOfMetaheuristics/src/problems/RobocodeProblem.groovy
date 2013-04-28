@@ -4,7 +4,7 @@ import applications.robocode.*
 
 class RobocodeProblem {
 	Integer evalCount = 0
-	Integer maxIterations = 1000
+	Integer maxIterations = 4
 	Integer IDcount = 0
 	
 	//Template Values
@@ -25,7 +25,8 @@ class RobocodeProblem {
 	
 	def create = {
 		id = IDcount++
-		
+		//Random random = new Random()
+		//id = random.nextInt(1000)
 		individual = new Individual(id)
 		
 	}
@@ -35,9 +36,9 @@ class RobocodeProblem {
 	def random = create
 	
 	def quality(i) {
-		def score = i.quality
-		if (i.quality == null){
 		
+		if (i.quality == null){
+		def score = i.quality
 		System.out.println("Building robot DarkSoul_" +  i.id)
 		robotBuilder = new RobotBuilder("templates/DarkSouls.template")
 		robotBuilder.buildJarFile(i.values)
@@ -50,9 +51,7 @@ class RobocodeProblem {
 		score = battleRunner.runBattle(i.id)
 		i.quality = score
 		}
-		
-		System.out.println("Score for DarkSoul_" + i.id + ": " + score)
-		return i
+		return i.quality
 		
 	}
 	
@@ -64,12 +63,13 @@ class RobocodeProblem {
 
 	}
 
-    def terminate = { a, q = quality(a) ->
+    def terminate(best) {
+		evalCount++
         evalCount >= maxIterations
     }
 
 	String toString() {
-
+		"Robocode"
 	}
 }
 

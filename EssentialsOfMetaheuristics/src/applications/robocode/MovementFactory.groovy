@@ -36,8 +36,7 @@ class MovementFactory {
 	def comparators = ["==", "<", ">" ]
 	def functionSet = args + cons
 	
-	//currently all code pieces must be the same length for crossover to work. FIX THIS
-	def limit = 3
+	def limit = 6
 	
 	def returnRobot() {
 
@@ -50,8 +49,7 @@ class MovementFactory {
 	}
 	
 	def create() {
-		//for ( i in 0..rand.nextInt(limit)) {
-		for ( i in 0..limit-1) {
+		for ( i in 0..rand.nextInt(limit)) {
 			code = code + orders[rand.nextInt(orders.size)]
 		}
 	}
