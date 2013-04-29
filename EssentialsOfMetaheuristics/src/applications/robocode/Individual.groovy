@@ -24,19 +24,27 @@ class Individual implements Cloneable {
 			movementFactory = new MovementFactory()
 			evolvedProperties[i] = movementFactory.returnRobot()
 			}
-
-			assignCode()
-			assignVals()
-	}
-	def toStr() {
-		def code = ""
-		for (item in this.evolvedProperties) {
-			code + item
-		}
+			
 	}
 	
-		
+	def codify() {
+		for (item in evolvedProperties){
+			evolvedProperties[item] = toStr(item)
+		}
+		assignCode()
+		assignVals()
+	}
+	def toStr(arr) {
+		System.out.println(arr)
+		def code = ""
+		for (item in arr) {
+			code + item
+		}
+		return code
+	}
+	
 	def assignCode() {
+		System.out.println(evolvedProperties)
 		codeRun = evolvedProperties[0]
 		codeWall = evolvedProperties[1]
 		codeCollision = evolvedProperties[2]

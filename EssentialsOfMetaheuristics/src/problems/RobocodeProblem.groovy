@@ -47,18 +47,19 @@ class RobocodeProblem {
 	def quality(i) {
 		
 		if (i.quality == null){
-		def score = i.quality
-		System.out.println("Building robot DarkSoul_" +  i.id)
-		robotBuilder = new RobotBuilder("templates/DarkSouls.template")
-		robotBuilder.buildJarFile(i.values)
-		System.out.println("Building with values   " + i.values)
-		
-		battleRunner = new BattleRunner("templates/battle.template")
-		
-		battleRunner.buildBattleFile(i.id)
-		
-		score = battleRunner.runBattle(i.id)
-		i.quality = score
+			def score = i.quality
+			System.out.println("Building robot DarkSoul_" +  i.id)
+			robotBuilder = new RobotBuilder("templates/DarkSouls.template")
+			i.codify()
+			robotBuilder.buildJarFile(i.values)
+			System.out.println("Building with values   " + i.values)
+			
+			battleRunner = new BattleRunner("templates/battle.template")
+			
+			battleRunner.buildBattleFile(i.id)
+			
+			score = battleRunner.runBattle(i.id)
+			i.quality = score
 		}
 		return i.quality
 		
