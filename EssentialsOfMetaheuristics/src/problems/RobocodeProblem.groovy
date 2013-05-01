@@ -51,6 +51,7 @@ class RobocodeProblem {
 			System.out.println("Building robot DarkSoul_" +  i.id)
 			robotBuilder = new RobotBuilder("templates/DarkSouls.template")
 			i.codify()
+			
 			robotBuilder.buildJarFile(i.values)
 			System.out.println("Building with values   " + i.values)
 			

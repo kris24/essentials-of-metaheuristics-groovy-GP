@@ -28,29 +28,27 @@ class Individual implements Cloneable {
 	}
 	
 	def codify() {
+		def codeArray = []
 		for (item in evolvedProperties){
-			evolvedProperties[item] = toStr(item)
+			def code = ""
+			for (p in item) {
+				code = code + p
+			}
+			codeArray.add(code)
 		}
-		assignCode()
+		System.out.println("Code Array  " + codeArray)
+		assignCode(codeArray)
 		assignVals()
-	}
-	def toStr(arr) {
-		System.out.println(arr)
-		def code = ""
-		for (item in arr) {
-			code + item
-		}
-		return code
+		System.out.println("Done")
 	}
 	
-	def assignCode() {
-		System.out.println(evolvedProperties)
-		codeRun = evolvedProperties[0]
-		codeWall = evolvedProperties[1]
-		codeCollision = evolvedProperties[2]
-		codeReceiveHit = evolvedProperties[3]
-		codeHit = evolvedProperties[4]
-		codeMiss = evolvedProperties[5]
+	def assignCode(arr) {
+		codeRun = arr[0]
+		codeWall = arr[1]
+		codeCollision = arr[2]
+		codeReceiveHit = arr[3]
+		codeHit = arr[4]
+		codeMiss = arr[5]
 	}
 	
 	
