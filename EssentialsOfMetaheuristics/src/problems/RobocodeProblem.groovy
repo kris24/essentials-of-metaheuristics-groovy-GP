@@ -4,7 +4,7 @@ import applications.robocode.*
 
 class RobocodeProblem {
 	Integer evalCount = 0
-	Integer maxIterations = 100
+	Integer maxIterations = 500
 	Integer IDcount = 0
 	
 	//Template Values
@@ -78,6 +78,7 @@ class RobocodeProblem {
 
     def terminate(best) {
 		evalCount++
+		System.out.println("Starting run "+ evalCount)
         evalCount >= maxIterations
     }
 
