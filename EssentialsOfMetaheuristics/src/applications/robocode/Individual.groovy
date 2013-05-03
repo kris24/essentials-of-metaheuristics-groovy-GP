@@ -36,10 +36,10 @@ class Individual implements Cloneable {
 			}
 			codeArray.add(code)
 		}
-		System.out.println("Code Array  " + codeArray)
+		//System.out.println("Code Array  " + codeArray)
 		assignCode(codeArray)
 		assignVals()
-		System.out.println("Done")
+		//System.out.println("Done")
 	}
 	
 	def assignCode(arr) {

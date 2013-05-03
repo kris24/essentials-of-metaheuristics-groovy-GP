@@ -5,23 +5,28 @@ class RoboCrossover {
 	def Random random = new Random()
 	
 	def crossover(problem, i1, i2) {
-		def result = []
-		for (i in 0..6){	
-			result[i] = onePointCrossover(i1.evolvedProperties,i2.evolvedProperties)
-		}
+		def result
+			result = onePointCrossover(i1.evolvedProperties,i2.evolvedProperties)
+		
 			
 		def child = problem.copy(i1)
-		child.evolvedProperties = result
+		//System.out.println("Original Father " + i1.evolvedProperties)
+		//System.out.println("result " + result)
+		child.evolvedProperties = result		
+		//System.out.println("Crossover Result " + child.evolvedProperties)
 		child.quality = problem.quality(child)
-		System.out.println("Quality " + i1.quality + " " + child.quality)
+		System.out.println("Quality of Child " + i1.quality + " " + child.quality)
 			return child
 		
 	}
 	//borrowed from Crossovers operator
-	def onePointCrossover = { father, mother, crossoverPoint1 = random.nextInt(father.size()), 
-		crossoverPoint2 = random.nextInt(mother.size()) ->
+	def onePointCrossover = { father, mother, crossoverPoint1 = 0, 
+		crossoverPoint2 = random.nextInt(3) ->
+		crossoverPoint1 += crossoverPoint2 + 3
 		[
-			father[0..<crossoverPoint1] + mother[crossoverPoint2..<mother.size()]
+			def res = father[0..<crossoverPoint1] + mother[crossoverPoint2..<mother.size()]			
 		]
+		System.out.println("STUFFS " + res)
+		return res
 	}
 }

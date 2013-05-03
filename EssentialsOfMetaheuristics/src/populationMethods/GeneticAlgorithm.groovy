@@ -7,7 +7,7 @@ class GeneticAlgorithm {
 	// Algorithm 20
 	
 	// We need popsize to be global so that we can use it in the toString method, also added a default value
-	def popsize = 8
+	def popsize = 20
 	
 	// Our Algorithm takes a Genetic Algorithm Problem, a desired population size
 	def maximize(problem, populationSize=popsize, selector=new TournamentSelection(), crosser=new RoboCrossover()) {
@@ -39,13 +39,14 @@ class GeneticAlgorithm {
 			for(i in 0..(popsize/2)) {
 				def parentA = selector.select(problem, startingPopulation as List)
 				def parentB = selector.select(problem, startingPopulation as List)
-				System.out.println(" ParentA    "  + parentA.id)
-				System.out.println(" ParentB    "  + parentB.id)
+				//System.out.println(" ParentA    "  + parentA.id)
+				//System.out.println(" ParentB    "  + parentB.id)
 				def children = []
 				children[0] = crosser.crossover(problem, parentA, parentB)
 				children[1] = crosser.crossover(problem, parentB, parentA)
-				System.out.println("New robot = DarkSoul_" + children[0].id)
-				System.out.println("New robot = DarkSoul_" + children[1].id)
+				//System.out.println("New robot = DarkSoul_" + children[0].id)
+				//System.out.println("New robot = DarkSoul_" + children[1].id)
+				System.out.println("\n + BEST SCORE:  " + best.quality)
 				endingPopulation.add(children[0])
 				endingPopulation.add(children[1])
 				

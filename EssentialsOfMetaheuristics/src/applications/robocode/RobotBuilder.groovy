@@ -51,18 +51,18 @@ class RobotBuilder {
 //        println "stdout: ${proc.in.text}"
     }
     
-    def buildJavaFile(values) {
-        def javaFileName = makeJavaFileName(values)
-        File javaFile = createFile(javaFileName)
-        writeFile(javaFile, values)
-        return javaFileName
-    }
+	def buildJavaFile(values) {
+		def javaFileName = makeJavaFileName(values)
+		File javaFile = createFile(javaFileName)
+		writeFile(javaFile, values)
+		return javaFileName
+	}
     
     def makeJavaFileName(values) {
         def id = values['id']
         def filename = "DarkSoul_${id}.java"
     }
-
+	
     private File createFile(javaFileName) {
 		//System.out.println("Java File " + javaFileName)
         new File(robotDirectory).mkdir()

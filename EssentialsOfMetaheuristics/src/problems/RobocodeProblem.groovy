@@ -4,7 +4,7 @@ import applications.robocode.*
 
 class RobocodeProblem {
 	Integer evalCount = 0
-	Integer maxIterations = 4
+	Integer maxIterations = 100
 	Integer IDcount = 0
 	
 	//Template Values
@@ -61,7 +61,9 @@ class RobocodeProblem {
 			
 			score = battleRunner.runBattle(i.id)
 			i.quality = score
+		
 		}
+		
 		return i.quality
 		
 	}
