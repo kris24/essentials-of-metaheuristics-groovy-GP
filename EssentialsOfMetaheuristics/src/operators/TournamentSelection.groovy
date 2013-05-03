@@ -4,24 +4,31 @@ import groovy.transform.ToString
 import java.util.Random
 
 class TournamentSelection{
-    Integer tournamentSize = 5
+    Integer tournamentSize = 50
     Random r = new Random()
+	def result = []
     def select(problem, population){
-        def s = population[r.nextInt(population.size())]
-		//System.out.println("population size "+ population.size())
-        def sQuality = problem.quality(s)
-		System.out.println("Tournament Pick DarkSoul_" + s.id + " " + sQuality)
+        def best = population[r.nextInt(population.size())]
+        def bestQuality = problem.quality(best)
+		def second = population[r.nextInt(population.size())]
+		def secondQuality = problem.quality(second)
         for(i in 2..tournamentSize) {
             def n = population[r.nextInt(population.size())]
             def nQuality = problem.quality(n)
-			System.out.println("Tournament Pick DarkSoul_" + n.id + " " + nQuality)
-            if(nQuality > sQuality){
-                s = n
-                sQuality = nQuality
+            if(nQuality >= bestQuality){
+				best = n
+                bestQuality = nQuality
             }
+			else if(nQuality > secondQuality){
+				second = n
+				secondQuality = nQuality
+			}
+			result[0] = best
+			result[1] = second
         }
-		System.out.println("Tournament Pick result DarkSoul_ " + s.id + " " + sQuality)
-        return s
+		System.out.println("Tournament Pick1 DarkSoul_ " + best.id + " " + bestQuality)
+		System.out.println("Tournament Pick2 DarkSoul_ " + second.id + " " + secondQuality)
+        return result
     }
     String toString() {
         "TS_" + tournamentSize
