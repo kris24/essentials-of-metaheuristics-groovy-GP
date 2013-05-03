@@ -4,7 +4,7 @@ import groovy.transform.ToString
 import java.util.Random
 
 class TournamentSelection{
-    Integer tournamentSize = 50
+    Integer tournamentSize = 10
     Random r = new Random()
 	def result = []
     def select(problem, population){

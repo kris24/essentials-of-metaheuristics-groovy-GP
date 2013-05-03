@@ -31,6 +31,11 @@ class RobocodeProblem {
 		
 	}
 	
+	def seed = {
+		id = IDcount++
+		individual = new Template(id)
+	}
+	
 	def copy(a) {
 		def copy = a.clone() 
 		id = IDcount++
